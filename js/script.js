@@ -1,10 +1,9 @@
-// header scroll state
+
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 12);
   }, {passive:true});
 
-  // mobile menu
   const burger = document.getElementById('burger');
   const navLinks = document.getElementById('nav-links');
   burger.addEventListener('click', () => {
@@ -30,7 +29,7 @@
     io.observe(el);
   });
 
-  // demo form (frontend only)
+
   const form = document.getElementById('demo-form');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -38,7 +37,7 @@
     document.getElementById('form-ok').classList.add('show');
   });
 
-  // live field validation
+
   form.querySelectorAll('input[required], textarea[required]').forEach((field) => {
     const validate = () => {
       field.classList.toggle('invalid', !field.checkValidity());
@@ -50,7 +49,7 @@
     });
   });
 
-  // scrollspy: highlight nav link for the section in view
+  
   const navBySection = {};
   document.querySelectorAll('#nav-links a[data-nav]').forEach((a) => {
     navBySection[a.getAttribute('data-nav')] = a;
@@ -69,7 +68,7 @@
   }, {rootMargin:'-50% 0px -45% 0px'});
   spySections.forEach((section) => spyIo.observe(section));
 
-  // back to top button
+
   const topBtn = document.getElementById('top-btn');
   window.addEventListener('scroll', () => {
     topBtn.classList.toggle('show', window.scrollY > 600);

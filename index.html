@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="/assets/willay_logo.png">
+<link rel="icon" href="/assets/logo_page/willay_logo.png">
 <meta name="theme-color" content="#0B2545">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Willay — Sistema de asistencia escolar para colegios del Perú">
@@ -236,7 +236,7 @@
       <div class="cta-band reveal">
         <div>
           <h2>¿Listo para dejar atrás el cuaderno de asistencia?</h2>
-          <p>Conversemos sobre el carné y el lector que ya tiene tu colegio, y cómo Willay se adapta a su forma de trabajar.</p>
+          <p>Conversemos sobre el carné y el lector que se incorporará, cómo Willay se adapta a su forma de trabajar.</p>
         </div>
         <div class="actions">
           <a href="#demo" class="btn btn-primary">Solicitar una demo</a>
@@ -254,7 +254,7 @@
         <h2>Cuéntanos sobre tu colegio</h2>
         <p>Te contactamos para coordinar una demostración con la información de tu colegio, sin compromiso.</p>
         <ul class="checklist">
-          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l5 5L20 6"/></svg> Revisamos el lector y los carnés que ya tienes instalados.</li>
+          <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l5 5L20 6"/></svg> Instalamos el lector y los carnés.</li>
           <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l5 5L20 6"/></svg> Te mostramos el panel de dirección, docentes y padres.</li>
           <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l5 5L20 6"/></svg> Definimos juntos los módulos que tu colegio necesita.</li>
         </ul>
@@ -357,7 +357,9 @@
 
 <div class="wa-chat" id="wa-chat" role="dialog" aria-modal="false" aria-labelledby="wa-chat-title" aria-hidden="true">
   <div class="wa-chat-header">
-    <div class="wa-chat-avatar">W</div>
+    <div class="wa-chat-avatar">
+      <img src="assets/logo_page/willay_logo.png" alt="Logo de Willay">
+    </div>
     <div>
       <p class="wa-chat-title" id="wa-chat-title">Willay</p>
       <p class="wa-chat-status"><span class="wa-dot"></span> Normalmente responde en minutos</p>
@@ -365,7 +367,7 @@
     <button type="button" class="wa-chat-close" id="wa-chat-close" aria-label="Cerrar chat">&times;</button>
   </div>
   <div class="wa-chat-body">
-    <div class="wa-bubble">¡Hola! 👋 Cuéntanos tu nombre y tu colegio, y seguimos la conversación por WhatsApp.</div>
+    <div class="wa-bubble">¡Hola! <ion-icon name="logo-whatsapp"></ion-icon> Cuéntanos tu nombre y tu colegio, y seguimos la conversación por WhatsApp.</div>
   </div>
   <form class="wa-chat-form" id="wa-chat-form">
     <input type="text" id="wa-nombre" name="wa-nombre" placeholder="Tu nombre" autocomplete="name" required>
@@ -383,6 +385,8 @@
 </button>
 
 <script src="js/script.js" defer></script>
+<script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>
