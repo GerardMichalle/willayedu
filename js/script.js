@@ -27,22 +27,70 @@
   });
 
 
+  const DEMO_FORM_ENDPOINT = 'https://formsubmit.co/ajax/hola@willay.pe';
   const form = document.getElementById('demo-form');
-  form.addEventListener('submit', (e) => {
+  const requiredFields = [...form.querySelectorAll('input[required], textarea[required]')];
+  const submitBtn = document.getElementById('demo-submit');
+  const formError = document.getElementById('form-error');
+  form.noValidate = true;
+
+  const validateField = (field) => {
+    const valid = field.checkValidity();
+    field.classList.toggle('invalid', !valid);
+    field.classList.toggle('valid', valid);
+    return valid;
+  };
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    document.getElementById('form-fields').style.display = 'none';
-    document.getElementById('form-ok').classList.add('show');
+    formError.classList.remove('show');
+
+    const invalidFields = requiredFields.filter((field) => !validateField(field));
+    if (invalidFields.length) {
+      invalidFields[0].focus();
+      return;
+    }
+
+    // honeypot: si un bot llenó este campo oculto, fingimos éxito y no enviamos nada
+    if (form.querySelector('[name="_honey"]').value) {
+      document.getElementById('form-fields').style.display = 'none';
+      document.getElementById('form-ok').classList.add('show');
+      return;
+    }
+
+    const payload = {
+      colegio: form.colegio.value.trim(),
+      contacto: form.contacto.value.trim(),
+      correo: form.correo.value.trim(),
+      celular: form.celular.value.trim(),
+      mensaje: form.mensaje.value.trim(),
+      _subject: 'Nueva solicitud de demo — Willay',
+      _template: 'table',
+      _captcha: 'false'
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    try {
+      const res = await fetch(DEMO_FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('request failed');
+      document.getElementById('form-fields').style.display = 'none';
+      document.getElementById('form-ok').classList.add('show');
+    } catch (err) {
+      formError.classList.add('show');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Solicitar demo';
+    }
   });
 
-
-  form.querySelectorAll('input[required], textarea[required]').forEach((field) => {
-    const validate = () => {
-      field.classList.toggle('invalid', !field.checkValidity());
-      field.classList.toggle('valid', field.checkValidity());
-    };
-    field.addEventListener('blur', validate);
+  requiredFields.forEach((field) => {
     field.addEventListener('input', () => {
-      if (field.classList.contains('invalid')) validate();
+      if (field.classList.contains('invalid')) validateField(field);
     });
   });
 

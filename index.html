@@ -14,12 +14,27 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Willay — Sistema de asistencia escolar para colegios del Perú">
 <meta property="og:description" content="Willay registra el ingreso y salida de cada estudiante con tarjeta RFID o QR y avisa a los padres al instante. Libreta virtual, reportes y roles para colegios peruanos.">
-<meta property="og:image" content="/assets/willay_logo.png">
+<meta property="og:image" content="/assets/logo_page/willay_logo.png">
 <meta property="og:locale" content="es_PE">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Willay — Sistema de asistencia escolar para colegios del Perú">
 <meta name="twitter:description" content="El carné de tu colegio, convertido en tranquilidad para cada familia.">
-<meta name="twitter:image" content="/assets/willay_logo.png">
+<meta name="twitter:image" content="/assets/logo_page/willay_logo.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Willay",
+  "description": "Sistema de asistencia escolar con tarjeta RFID y QR para colegios del Perú.",
+  "email": "hola@willay.pe",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Trujillo",
+    "addressCountry": "PE"
+  },
+  "sameAs": []
+}
+</script>
 </head>
 <body>
 
@@ -283,8 +298,9 @@
           <li><svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l5 5L20 6"/></svg> Definimos juntos los módulos que tu colegio necesita.</li>
         </ul>
       </div>
-      <form class="demo reveal" id="demo-form">
+      <form class="demo reveal" id="demo-form" novalidate>
         <div id="form-fields">
+          <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="row2">
             <div class="field">
               <label for="colegio">Nombre del colegio</label>
@@ -313,8 +329,9 @@
             <label for="mensaje">Cuéntanos brevemente sobre tu colegio</label>
             <textarea id="mensaje" name="mensaje" placeholder="Número de alumnos, sedes, si ya tienen lector y carnés..."></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Solicitar demo</button>
+          <button type="submit" class="btn btn-primary" id="demo-submit">Solicitar demo</button>
           <p class="form-note">Nos pondremos en contacto en menos de 2 días útiles.</p>
+          <p class="form-error" id="form-error" role="alert">No pudimos enviar tu solicitud. Escríbenos por WhatsApp o a <a href="mailto:hola@willay.pe">hola@willay.pe</a>.</p>
         </div>
         <div class="form-ok" id="form-ok">
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12l5 5L20 6"/></svg>
@@ -358,6 +375,9 @@
         <ul>
           <li>Trujillo, Perú</li>
         </ul>
+        <a href="libro-reclamaciones.html" class="claims-badge" aria-label="Ir al Libro de Reclamaciones">
+          <img src="assets/libro_reclamaciones/libro_reclamos.png" alt="Libro de Reclamaciones" width="120" height="90" loading="lazy">
+        </a>
       </div>
     </div>
     <div class="foot-bottom">

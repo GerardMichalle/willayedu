@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libro de Reclamaciones — Willay</title>
+<meta name="description" content="Libro de Reclamaciones de Willay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="claims-page">
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo" aria-label="Volver al inicio de Willay">
+      <svg class="mark" viewBox="0 0 32 32" fill="none"><rect x="13" y="1" width="6" height="6" fill="#C8102E"/><rect x="7" y="7" width="6" height="6" fill="#C8102E"/><rect x="19" y="7" width="6" height="6" fill="#C8102E"/><rect x="1" y="13" width="6" height="6" fill="#0B2545"/><rect x="13" y="13" width="6" height="6" fill="#C08A3E"/><rect x="25" y="13" width="6" height="6" fill="#0B2545"/><rect x="7" y="19" width="6" height="6" fill="#C8102E"/><rect x="19" y="19" width="6" height="6" fill="#C8102E"/><rect x="13" y="25" width="6" height="6" fill="#C8102E"/></svg>
+      Willay
+    </a>
+    <a class="claims-back" href="index.html">← Volver al inicio</a>
+  </div>
+</header>
+<main class="claims-main">
+  <section class="claims-hero">
+    <div class="wrap claims-hero-grid">
+      <div>
+        <span class="eyebrow">Atención al usuario</span>
+        <h1>Libro de<br><span>Reclamaciones</span></h1>
+        <p>Registra aquí tu reclamo o queja. Revisaremos tu caso y nos comunicaremos contigo dentro del plazo correspondiente.</p>
+        <a class="btn btn-primary" href="#registro">Registrar un reclamo</a>
+      </div>
+      <div class="claims-book-art" aria-hidden="true">
+        <svg viewBox="0 0 540 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pageLeft" x1="80" y1="100" x2="270" y2="315" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF"/><stop offset="1" stop-color="#E7E2D8"/></linearGradient>
+            <linearGradient id="pageRight" x1="300" y1="100" x2="470" y2="315" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF"/><stop offset="1" stop-color="#D8DCE1"/></linearGradient>
+            <filter id="bookShadow" x="30" y="145" width="480" height="180" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="13"/></filter>
+          </defs>
+          <ellipse cx="270" cy="287" rx="205" ry="22" fill="#0B2545" fill-opacity=".25" filter="url(#bookShadow)"/>
+          <path d="M53 280 258 309l14 23L69 304 53 280Z" fill="#071A31"/>
+          <path d="m487 280-205 29-14 23 203-28 16-24Z" fill="#071A31"/>
+          <path d="M59 260c91-21 155 1 211 42V329C206 286 144 275 59 294v-34Z" fill="#0B2545"/>
+          <path d="M481 260c-91-21-155 1-211 42V329c64-43 126-54 211-35v-34Z" fill="#0B2545"/>
+          <path d="M67 252c67-65 146-65 203 30v27c-58-78-133-84-203-31v-26Z" fill="url(#pageLeft)" stroke="#C8CCD2"/>
+          <path d="M473 252c-67-65-146-65-203 30v27c58-78 133-84 203-31v-26Z" fill="url(#pageRight)" stroke="#C8CCD2"/>
+          <path d="M270 282v47" stroke="#8D95A1" stroke-width="3"/>
+          <path d="M92 266c58-24 112-8 153 39M100 280c54-20 103-5 139 28M448 266c-58-24-112-8-153 39M440 280c-54-20-103-5-139 28" stroke="#A9AFB7" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+  <section class="claims-form-section" id="registro">
+    <div class="wrap claims-form-wrap">
+      <div class="claims-form-intro">
+        <span class="eyebrow">Formulario</span>
+        <h2>Cuéntanos lo sucedido</h2>
+        <p>Completa tus datos para poder dar seguimiento a tu caso.</p>
+      </div>
+      <form class="claims-form">
+        <div class="row2">
+          <div class="field"><label for="claim-name">Nombre completo</label><input id="claim-name" name="name" type="text" placeholder="Nombre y apellido"></div>
+          <div class="field"><label for="claim-email">Correo electrónico</label><input id="claim-email" name="email" type="email" placeholder="correo@ejemplo.com"></div>
+        </div>
+        <div class="field"><label for="claim-detail">Detalle de la reclamación</label><textarea id="claim-detail" name="detail" placeholder="Describe tu caso con la mayor claridad posible."></textarea></div>
+        <button type="button" class="btn btn-primary">Enviar reclamación</button>
+      </form>
+    </div>
+  </section>
+</main>
+<footer class="claims-footer"><div class="wrap"><span>© 2026 Willay. Todos los derechos reservados.</span><a href="index.html">willay.pe</a></div></footer>
+</body>
+</html>
