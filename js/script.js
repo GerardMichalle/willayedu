@@ -168,3 +168,75 @@
     waForm.reset();
     closeWaChat();
   });
+
+  // ---------- Mapa "Dónde estamos" ----------
+  // El mapa es la foto assets/imgs/peru.jpg (1101x1429px). Cada sede se ubica con xPercent/yPercent,
+  // el porcentaje de esa posición respecto al ancho y alto totales de la imagen.
+  //
+  // Para sumar una nueva sede: abre assets/imgs/peru.jpg en cualquier editor de imágenes o visor
+  // que muestre la posición del cursor en píxeles, ubica el punto exacto sobre la ciudad y calcula:
+  //   xPercent = (píxel X del punto / 1101) * 100
+  //   yPercent = (píxel Y del punto / 1429) * 100
+  // Agrega el objeto abajo con esos valores — el punto y su burbuja se dibujan solos, sin tocar
+  // el resto del mapa. Usa active:false para una sede "Próximamente" (punto gris, sin pulso).
+  const PERU_LOCATIONS = [
+    {
+      id: 'trujillo',
+      name: 'Trujillo',
+      region: 'La Libertad',
+      status: 'Sistema implementado',
+      xPercent: 15.84,
+      yPercent: 43.14,
+      active: true
+    }
+  ];
+
+  const peruMap = document.getElementById('peru-map');
+  if (peruMap) {
+    const closeAllPins = () => {
+      peruMap.querySelectorAll('.map-pin.is-open').forEach((pin) => pin.classList.remove('is-open'));
+    };
+
+    PERU_LOCATIONS.forEach((loc) => {
+      const pin = document.createElement('div');
+      pin.className = 'map-pin';
+      pin.style.left = loc.xPercent + '%';
+      pin.style.top = loc.yPercent + '%';
+
+      const marker = document.createElement('button');
+      marker.type = 'button';
+      marker.className = 'map-marker' + (loc.active === false ? ' is-inactive' : '');
+      marker.setAttribute('aria-describedby', `tooltip-${loc.id}`);
+      marker.setAttribute('aria-label', `${loc.name}, ${loc.region}: ${loc.status}`);
+      marker.innerHTML = '<span class="marker-pulse"></span><span class="marker-dot"></span>';
+
+      const tooltip = document.createElement('div');
+      tooltip.className = 'map-tooltip' + (loc.active === false ? ' is-inactive' : '');
+      tooltip.id = `tooltip-${loc.id}`;
+      tooltip.setAttribute('role', 'tooltip');
+      tooltip.innerHTML = `<strong>${loc.name}</strong><span>${loc.region}</span><span class="tooltip-status"><i></i>${loc.status}</span>`;
+
+      pin.appendChild(marker);
+      pin.appendChild(tooltip);
+      peruMap.appendChild(pin);
+
+      const open = () => { closeAllPins(); pin.classList.add('is-open'); };
+      const close = () => pin.classList.remove('is-open');
+
+      marker.addEventListener('mouseenter', open);
+      marker.addEventListener('mouseleave', close);
+      marker.addEventListener('focus', open);
+      marker.addEventListener('blur', close);
+      marker.addEventListener('click', (e) => {
+        e.stopPropagation();
+        pin.classList.contains('is-open') ? close() : open();
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!peruMap.contains(e.target)) closeAllPins();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAllPins();
+    });
+  }

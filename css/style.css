@@ -140,6 +140,93 @@
     .id-card,.check,.pulse-ring{animation:none;}
   }
 
+  /* ---------- Value proposition ---------- */
+  .value-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;}
+  .goals-list{margin-top:30px;display:flex;flex-direction:column;gap:24px;}
+  .goals-list li{display:flex;gap:14px;align-items:flex-start;}
+  .goals-list .tick{width:20px;height:20px;flex:none;margin-top:3px;color:var(--dorado);}
+  .goals-list p{font-size:.98rem;line-height:1.7;color:var(--piedra);margin:0;}
+  .goals-list strong{color:var(--tinta);font-weight:600;}
+
+  .value-visual{border-radius:var(--radio);overflow:hidden;box-shadow:0 30px 60px -26px rgba(11,37,69,.4);}
+  .value-photo{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+
+
+  /* ---------- Dónde estamos (mapa) ---------- */
+  .map-grid{display:grid;grid-template-columns:.85fr 1fr;gap:64px;align-items:center;}
+  .map-section .section-head{margin-bottom:0;}
+  .map-legend{margin-top:34px;display:flex;flex-direction:column;gap:12px;}
+  .legend-item{display:flex;align-items:center;gap:10px;font-size:.92rem;font-weight:600;color:var(--tinta-soft);}
+  .legend-dot{width:10px;height:10px;border-radius:50%;background:var(--piedra-light);flex:none;}
+  .legend-dot.is-active{background:var(--dorado);}
+  .map-hint{font-size:.85rem;color:var(--piedra);margin-top:6px;max-width:36ch;}
+
+  .peru-map-card{
+    position:relative;width:100%;max-width:360px;margin:0 auto;
+    background:#fff;border:1px solid var(--linea);border-radius:calc(var(--radio) + 10px);
+    padding:22px 22px 16px;box-shadow:0 34px 64px -26px rgba(11,37,69,.38);
+  }
+  .peru-map-wrap{
+    position:relative;width:100%;
+    aspect-ratio:1101/1429;background:var(--crema);
+  }
+  .peru-map-clip{position:absolute;inset:0;border-radius:var(--radio);overflow:hidden;}
+  .peru-photo{
+    width:100%;height:100%;display:block;object-fit:cover;
+    filter:grayscale(1) brightness(1.14) contrast(1.06);
+  }
+  .peru-map-clip::after{
+    content:"";position:absolute;inset:0;background:var(--tinta-soft);
+    mix-blend-mode:color;opacity:.6;pointer-events:none;
+  }
+  .peru-map-caption{
+    display:block;text-align:center;margin-top:14px;
+    font-family:var(--font-d);font-weight:600;font-size:.86rem;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--piedra);
+  }
+
+  .map-pin{position:absolute;transform:translate(-50%,-50%);z-index:2;}
+  .map-marker{
+    position:relative;width:26px;height:26px;border:0;background:none;padding:0;cursor:pointer;
+    display:grid;place-items:center;
+  }
+  .marker-dot{
+    width:11px;height:11px;border-radius:50%;background:var(--dorado);
+    box-shadow:0 0 0 4px rgba(255,247,241,.95);position:relative;z-index:2;
+    transition:transform .25s var(--ease);
+  }
+  .marker-pulse{
+    position:absolute;width:26px;height:26px;border-radius:50%;background:var(--dorado);
+    animation:map-pulse 2.4s var(--ease) infinite;
+  }
+  .map-marker:hover .marker-dot,.map-marker:focus-visible .marker-dot{transform:scale(1.15);}
+  .map-marker.is-inactive .marker-dot{background:var(--piedra-light);}
+  .map-marker.is-inactive .marker-pulse{display:none;}
+  @keyframes map-pulse{
+    0%{opacity:.5;transform:scale(.5);}
+    100%{opacity:0;transform:scale(2.1);}
+  }
+
+  .map-tooltip{
+    position:absolute;left:50%;bottom:calc(100% + 16px);transform:translate(-50%,6px);
+    background:var(--tinta);color:#fff;padding:14px 18px;border-radius:12px;min-width:180px;
+    box-shadow:0 20px 40px -14px rgba(11,37,69,.5);
+    opacity:0;visibility:hidden;pointer-events:none;text-align:left;
+    transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s;
+  }
+  .map-tooltip::after{
+    content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);
+    border:7px solid transparent;border-top-color:var(--tinta);
+  }
+  .map-tooltip strong{display:block;font-family:var(--font-d);font-size:1.02rem;color:#fff;}
+  .map-tooltip span{display:block;font-size:.83rem;color:#C9D3DF;margin-top:2px;}
+  .tooltip-status{display:flex!important;align-items:center;gap:7px;margin-top:9px;color:#fff!important;font-weight:600;font-size:.8rem;}
+  .tooltip-status i{width:7px;height:7px;border-radius:50%;background:#2E9E5B;flex:none;}
+  .map-tooltip.is-inactive .tooltip-status i{background:var(--piedra-light);}
+  .map-pin.is-open .map-tooltip{opacity:1;visibility:visible;transform:translate(-50%,0);pointer-events:auto;}
+  @media (prefers-reduced-motion:reduce){.marker-pulse{animation:none;}}
+
+
   .logos-strip{padding:36px 0;background:var(--crema);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);}
   .logos-label{display:block;text-align:center;font-size:.78rem;font-weight:600;letter-spacing:.04em;color:var(--piedra);margin-bottom:20px;}
   .logos-label em{font-style:normal;font-weight:400;opacity:.75;}
@@ -396,6 +483,11 @@
     .modules-grid{grid-template-columns:repeat(2,1fr);}
     .foot-grid{grid-template-columns:1fr 1fr;}
     .demo-grid{grid-template-columns:1fr;}
+    .value-grid{grid-template-columns:1fr;gap:36px;}
+    .value-visual{order:-1;}
+    .value-photo{aspect-ratio:16/10;}
+    .map-grid{grid-template-columns:1fr;gap:48px;}
+    .map-copy .section-head{max-width:none;}
   }
   @media (max-width:760px){
     .hero{
@@ -427,6 +519,7 @@
     .foot-bottom{flex-direction:column;text-align:center;}
     .stats-grid{grid-template-columns:1fr;gap:36px;}
     .logos-row{gap:12px 20px;}
+    .map-tooltip{min-width:160px;padding:12px 16px;}
 
     /* mobile sticky CTA + floating */
     .mobile-cta-bar{display:block;}
