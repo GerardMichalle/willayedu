@@ -18,9 +18,12 @@
   // scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      e.target.classList.toggle('is-visible', e.isIntersecting);
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
     });
-  }, {threshold:.15});
+  }, {threshold:0, rootMargin:'0px 0px 300px 0px'});
   document.querySelectorAll('.reveal').forEach((el, i) => {
     el.style.transitionDelay = (i % 4) * 60 + 'ms';
     io.observe(el);
