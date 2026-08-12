@@ -243,3 +243,293 @@
       if (e.key === 'Escape') closeAllPins();
     });
   }
+
+  // ---------- Demo interactiva ----------
+  const demoModal = document.getElementById('demo-modal');
+  if (demoModal) {
+    const DEMO_ROLES = [
+      {
+        id: 'direccion',
+        slides: [
+          { src: 'img-demo/demo_pantalla1.png', caption: 'Inicio de sesión con una cuenta demo distinta para cada rol.' },
+          { src: 'img-demo/demo_pantalla2.png', caption: 'Panel de dirección: asistencia del día, tardanzas y eventos del colegio.' },
+          { src: 'img-demo/demo_pantalla3.png', caption: 'Control en vivo: cada tap del carné se registra al instante en la puerta.' }
+        ]
+      },
+      {
+        id: 'profesores',
+        slides: [
+          { src: 'img-demo/demo_pantalla1_profesores.png', caption: 'Mi aula: asistencia en vivo de los estudiantes a cargo del docente.' },
+          { src: 'img-demo/demo_pantalla2_profesores.png', caption: 'Notas y libretas listas para publicar a estudiantes y familias.' }
+        ]
+      },
+      {
+        id: 'padres',
+        slides: [
+          { src: 'img-demo/demo_pantalla1_padres.png', caption: 'Resumen del hijo: ingreso al colegio, conducta y comunicados recientes.' },
+          { src: 'img-demo/demo_pantalla2_padres.png', caption: 'Historial de asistencia de sus hijos, exportable por periodo.' }
+        ]
+      },
+      {
+        id: 'alumnos',
+        slides: [
+          { src: 'img-demo/demo_pantalla1_alumno.png', caption: 'Mi perfil: tarjeta digital con QR, asistencia del mes y méritos.' }
+        ]
+      }
+    ];
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fineHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+    const demoOpenBtn = document.getElementById('demo-open-btn');
+    const demoModalBackdrop = document.getElementById('demo-modal-backdrop');
+    const demoModalPanel = document.getElementById('demo-modal-panel');
+    const demoModalClose = document.getElementById('demo-modal-close');
+    const demoTabs = [...document.querySelectorAll('#demo-tabs .demo-tab')];
+    const demoProgressBar = document.getElementById('demo-progress-bar');
+    const demoStage = document.getElementById('demo-stage');
+    const demoBrowser = document.getElementById('demo-browser');
+    const demoPrev = document.getElementById('demo-prev');
+    const demoNext = document.getElementById('demo-next');
+    const demoImgA = document.getElementById('demo-img-a');
+    const demoImgB = document.getElementById('demo-img-b');
+    const demoZoomBtn = document.getElementById('demo-zoom-btn');
+    const demoCaption = document.getElementById('demo-caption');
+    const demoDots = document.getElementById('demo-dots');
+
+    const demoLightbox = document.getElementById('demo-lightbox');
+    const demoLightboxClose = document.getElementById('demo-lightbox-close');
+    const demoLightboxPrev = document.getElementById('demo-lightbox-prev');
+    const demoLightboxNext = document.getElementById('demo-lightbox-next');
+    const demoLightboxFrame = document.getElementById('demo-lightbox-frame');
+    const demoLightboxImg = document.getElementById('demo-lightbox-img');
+    const demoLightboxHint = document.getElementById('demo-lightbox-hint');
+
+    let roleIndex = 0;
+    let slideIndex = 0;
+    let activeLayer = 'a';
+    let isLightboxOpen = false;
+    let lastFocusedEl = null;
+
+    const getRole = () => DEMO_ROLES[roleIndex];
+    const getSlide = () => getRole().slides[slideIndex];
+
+    function renderDots() {
+      const slides = getRole().slides;
+      demoDots.innerHTML = '';
+      demoDots.style.display = slides.length <= 1 ? 'none' : 'flex';
+      slides.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        if (i === slideIndex) b.classList.add('is-active');
+        b.setAttribute('aria-label', `Ir a la pantalla ${i + 1}`);
+        b.addEventListener('click', () => goToSlide(i));
+        demoDots.appendChild(b);
+      });
+    }
+
+    function renderSlide(instant) {
+      const slide = getSlide();
+      const layers = { a: demoImgA, b: demoImgB };
+      const activeEl = layers[activeLayer];
+      const otherKey = activeLayer === 'a' ? 'b' : 'a';
+      const otherEl = layers[otherKey];
+
+      if (instant) {
+        activeEl.src = slide.src;
+        activeEl.alt = slide.caption;
+        activeEl.classList.add('is-active');
+        otherEl.classList.remove('is-active');
+      } else {
+        const preload = new Image();
+        preload.onload = () => {
+          otherEl.src = slide.src;
+          otherEl.alt = slide.caption;
+          requestAnimationFrame(() => {
+            otherEl.classList.add('is-active');
+            activeEl.classList.remove('is-active');
+            activeLayer = otherKey;
+          });
+        };
+        preload.src = slide.src;
+      }
+
+      demoCaption.textContent = slide.caption;
+      renderDots();
+      syncLightboxImage();
+    }
+
+    function restartAutoplay() {
+      demoProgressBar.classList.remove('running', 'paused');
+      void demoProgressBar.offsetWidth;
+      if (getRole().slides.length <= 1 || prefersReducedMotion) return;
+      demoProgressBar.classList.add('running');
+    }
+
+    function goToSlide(i, instant) {
+      const len = getRole().slides.length;
+      slideIndex = ((i % len) + len) % len;
+      renderSlide(instant);
+      restartAutoplay();
+    }
+    const nextSlide = () => goToSlide(slideIndex + 1);
+    const prevSlide = () => goToSlide(slideIndex - 1);
+
+    function switchRole(i) {
+      roleIndex = i;
+      slideIndex = 0;
+      demoTabs.forEach((t, idx) => {
+        t.classList.toggle('is-active', idx === i);
+        t.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+      });
+      const single = getRole().slides.length <= 1;
+      demoPrev.style.display = single ? 'none' : 'flex';
+      demoNext.style.display = single ? 'none' : 'flex';
+      renderSlide(true);
+      restartAutoplay();
+    }
+
+    demoProgressBar.addEventListener('animationend', () => {
+      if (demoModal.classList.contains('open') && !isLightboxOpen) nextSlide();
+    });
+    demoStage.addEventListener('mouseenter', () => demoProgressBar.classList.add('paused'));
+    demoStage.addEventListener('mouseleave', () => demoProgressBar.classList.remove('paused'));
+    document.addEventListener('visibilitychange', () => {
+      if (!demoModal.classList.contains('open')) return;
+      demoProgressBar.classList.toggle('paused', document.hidden || isLightboxOpen);
+    });
+
+    demoTabs.forEach((tab, i) => tab.addEventListener('click', () => switchRole(i)));
+    demoPrev.addEventListener('click', prevSlide);
+    demoNext.addEventListener('click', nextSlide);
+
+    function trapFocus(e) {
+      const container = isLightboxOpen ? demoLightbox : demoModalPanel;
+      const focusables = [...container.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+        .filter((el) => el.offsetParent !== null);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    function onModalKeydown(e) {
+      if (e.key === 'Escape') {
+        isLightboxOpen ? closeLightbox() : closeDemoModal();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'Tab') {
+        trapFocus(e);
+      }
+    }
+
+    function openDemoModal() {
+      lastFocusedEl = document.activeElement;
+      demoModal.classList.add('open');
+      demoModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      switchRole(roleIndex);
+      demoModalClose.focus();
+      document.addEventListener('keydown', onModalKeydown);
+    }
+    function closeDemoModal() {
+      demoModal.classList.remove('open');
+      demoModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      demoProgressBar.classList.remove('running', 'paused');
+      closeLightbox();
+      document.removeEventListener('keydown', onModalKeydown);
+      if (lastFocusedEl) lastFocusedEl.focus();
+    }
+    demoOpenBtn.addEventListener('click', openDemoModal);
+    demoModalClose.addEventListener('click', closeDemoModal);
+    demoModalBackdrop.addEventListener('click', closeDemoModal);
+
+    // ---- Lightbox: acercar la pantalla ----
+    function resetZoom() {
+      demoLightboxFrame.style.setProperty('--zs', '1');
+      demoLightboxFrame.style.setProperty('--zx', '50%');
+      demoLightboxFrame.style.setProperty('--zy', '50%');
+      demoLightboxFrame.classList.remove('zoomed');
+    }
+    function syncLightboxImage() {
+      if (!isLightboxOpen) return;
+      const slide = getSlide();
+      demoLightboxImg.src = slide.src;
+      demoLightboxImg.alt = slide.caption;
+      resetZoom();
+    }
+    function openLightbox() {
+      isLightboxOpen = true;
+      demoProgressBar.classList.add('paused');
+      const slide = getSlide();
+      demoLightboxImg.src = slide.src;
+      demoLightboxImg.alt = slide.caption;
+      demoLightboxHint.textContent = fineHover
+        ? 'Mueve el cursor sobre la imagen para acercar'
+        : 'Toca la imagen para acercar';
+      demoLightbox.classList.add('open');
+      demoLightbox.setAttribute('aria-hidden', 'false');
+      resetZoom();
+      demoLightboxClose.focus();
+    }
+    function closeLightbox() {
+      if (!isLightboxOpen) return;
+      isLightboxOpen = false;
+      demoLightbox.classList.remove('open');
+      demoLightbox.setAttribute('aria-hidden', 'true');
+      resetZoom();
+      demoProgressBar.classList.remove('paused');
+      demoZoomBtn.focus();
+    }
+    demoZoomBtn.addEventListener('click', openLightbox);
+    demoImgA.addEventListener('click', openLightbox);
+    demoImgB.addEventListener('click', openLightbox);
+    demoLightboxClose.addEventListener('click', closeLightbox);
+    demoLightbox.addEventListener('click', (e) => { if (e.target === demoLightbox) closeLightbox(); });
+    demoLightboxPrev.addEventListener('click', prevSlide);
+    demoLightboxNext.addEventListener('click', nextSlide);
+
+    if (fineHover) {
+      demoLightboxFrame.addEventListener('mouseenter', () => {
+        demoLightboxFrame.style.setProperty('--zs', '2.2');
+        demoLightboxFrame.classList.add('zoomed');
+      });
+      demoLightboxFrame.addEventListener('mousemove', (e) => {
+        const rect = demoLightboxFrame.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        demoLightboxFrame.style.setProperty('--zx', x + '%');
+        demoLightboxFrame.style.setProperty('--zy', y + '%');
+      });
+      demoLightboxFrame.addEventListener('mouseleave', resetZoom);
+
+      demoStage.addEventListener('mousemove', (e) => {
+        if (isLightboxOpen || prefersReducedMotion) return;
+        const rect = demoBrowser.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        demoBrowser.style.transform = `perspective(1200px) rotateX(${(-py * 4).toFixed(2)}deg) rotateY(${(px * 4).toFixed(2)}deg)`;
+      });
+      demoStage.addEventListener('mouseleave', () => { demoBrowser.style.transform = ''; });
+    } else {
+      demoLightboxFrame.addEventListener('click', (e) => {
+        if (demoLightboxFrame.classList.contains('zoomed')) { resetZoom(); return; }
+        const rect = demoLightboxFrame.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        demoLightboxFrame.style.setProperty('--zx', x + '%');
+        demoLightboxFrame.style.setProperty('--zy', y + '%');
+        demoLightboxFrame.style.setProperty('--zs', '2.1');
+        demoLightboxFrame.classList.add('zoomed');
+      });
+    }
+  }

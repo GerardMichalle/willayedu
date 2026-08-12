@@ -159,28 +159,28 @@
       <div class="section-head reveal">
         <span class="eyebrow">Un sistema, cuatro miradas</span>
         <h2>Cada persona del colegio ve solo lo que necesita</h2>
-        <p>Dirección, docentes, padres y estudiantes acceden al mismo registro de asistencia, cada uno desde su propio panel y con sus propios permisos.</p>
+        <p>Dirección, docentes, padres y estudiantes acceden al mismo registro de asistencia, cada uno desde su propio panel y con sus propios permisos</p>
       </div>
       <div class="roles-grid">
         <div class="role-card reveal">
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg>
           <h3>Dirección y administración</h3>
-          <p>Vista consolidada de asistencia por aula, sede y periodo, con reportes exportables por código de alumno para uso administrativo.</p>
+          <p>Vista consolidada de asistencia por aula, sede y periodo, con reportes exportables por código de alumno para uso administrativo</p>
         </div>
         <div class="role-card reveal">
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           <h3>Docentes</h3>
-          <p>Panel pensado para el celular: registro de notas y observaciones por alumno, sin depender de una computadora en el aula.</p>
+          <p>Panel pensado para el celular: registro de notas y observaciones por alumno, sin depender de una computadora en el aula</p>
         </div>
         <div class="role-card reveal">
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <h3>Padres de familia</h3>
-          <p>Alerta instantánea en cuanto su hijo o hija ingresa o sale del colegio, y acceso a la libreta virtual con el historial completo.</p>
+          <p>Alerta instantánea en cuanto su hijo o hija ingresa o sale del colegio, y acceso a la libreta virtual con el historial completo</p>
         </div>
         <div class="role-card reveal">
           <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><circle cx="7.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
           <h3>Estudiantes</h3>
-          <p>Su carné RFID o QR es su llave de ingreso: sin claves que recordar ni procesos manuales en la puerta del colegio.</p>
+          <p>Su carné RFID o QR es su llave de ingreso: sin claves que recordar ni procesos manuales en la puerta del colegio</p>
         </div>
       </div>
     </div>
@@ -313,6 +313,23 @@
         <div class="fx-footer-item">
           <span class="fx-footer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg></span>
           <div><strong>Protegemos sus datos</strong><p>Cumplimos con altos estándares de privacidad y seguridad</p></div>
+        </div>
+      </div>
+
+      <div class="demo-cta reveal">
+        <div class="demo-cta-text">
+          <span class="eyebrow">Míralo en acción</span>
+          <h3>Recorre el panel de Willay</h3>
+          <p>Una demo interactiva con pantallas reales del sistema: dirección, docentes, padres y estudiantes.</p>
+          <button type="button" class="btn btn-primary demo-cta-btn" id="demo-open-btn">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M10 8.3v7.4l6.3-3.7z" fill="currentColor" stroke="none"/></svg>
+            Ver demo interactiva
+          </button>
+        </div>
+        <div class="demo-cta-preview" aria-hidden="true">
+          <span class="dcp-shot dcp-1"><img src="img-demo/demo_pantalla2.png" alt="" loading="lazy"></span>
+          <span class="dcp-shot dcp-2"><img src="img-demo/demo_pantalla1_padres.png" alt="" loading="lazy"></span>
+          <span class="dcp-shot dcp-3"><img src="img-demo/demo_pantalla1_alumno.png" alt="" loading="lazy"></span>
         </div>
       </div>
     </div>
@@ -529,6 +546,87 @@
 <button class="float-btn top-btn" id="top-btn" aria-label="Volver arriba">
   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
 </button>
+
+<div class="demo-modal" id="demo-modal" aria-hidden="true">
+  <div class="demo-modal-backdrop" id="demo-modal-backdrop"></div>
+  <div class="demo-modal-panel" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" id="demo-modal-panel">
+    <div class="demo-modal-head">
+      <div>
+        <span class="eyebrow">Demo interactiva</span>
+        <h3 id="demo-modal-title">Así se ve Willay por dentro</h3>
+      </div>
+      <button type="button" class="demo-modal-close" id="demo-modal-close" aria-label="Cerrar demo">&times;</button>
+    </div>
+
+    <div class="demo-tabs" id="demo-tabs" role="tablist">
+      <button type="button" class="demo-tab is-active" data-role="direccion" role="tab" aria-selected="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg>
+        Dirección
+      </button>
+      <button type="button" class="demo-tab" data-role="profesores" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Docentes
+      </button>
+      <button type="button" class="demo-tab" data-role="padres" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Padres
+      </button>
+      <button type="button" class="demo-tab" data-role="alumnos" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><circle cx="7.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
+        Alumnos
+      </button>
+    </div>
+
+    <div class="demo-progress"><div class="demo-progress-bar" id="demo-progress-bar"></div></div>
+
+    <div class="demo-stage" id="demo-stage">
+      <button type="button" class="demo-nav prev" id="demo-prev" aria-label="Pantalla anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg>
+      </button>
+      <div class="demo-browser" id="demo-browser">
+        <div class="demo-browser-bar">
+          <span class="demo-dot r"></span><span class="demo-dot y"></span><span class="demo-dot g"></span>
+          <span class="demo-browser-url">
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+            app.willay.pe
+          </span>
+        </div>
+        <div class="demo-browser-body" id="demo-browser-body">
+          <img class="demo-slide is-active" id="demo-img-a" src="" alt="">
+          <img class="demo-slide" id="demo-img-b" src="" alt="">
+          <button type="button" class="demo-zoom-btn" id="demo-zoom-btn" aria-label="Acercar imagen">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+            Acercar
+          </button>
+        </div>
+      </div>
+      <button type="button" class="demo-nav next" id="demo-next" aria-label="Siguiente pantalla">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="demo-modal-foot">
+      <p class="demo-caption" id="demo-caption"></p>
+      <div class="demo-dots" id="demo-dots"></div>
+    </div>
+  </div>
+</div>
+
+<div class="demo-lightbox" id="demo-lightbox" aria-hidden="true">
+  <button type="button" class="demo-lightbox-close" id="demo-lightbox-close" aria-label="Cerrar imagen ampliada">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <button type="button" class="demo-lightbox-nav prev" id="demo-lightbox-prev" aria-label="Pantalla anterior">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg>
+  </button>
+  <div class="demo-lightbox-frame" id="demo-lightbox-frame">
+    <img id="demo-lightbox-img" src="" alt="">
+  </div>
+  <button type="button" class="demo-lightbox-nav next" id="demo-lightbox-next" aria-label="Siguiente pantalla">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+  </button>
+  <p class="demo-lightbox-hint" id="demo-lightbox-hint">Mueve el cursor sobre la imagen para acercar</p>
+</div>
 
 <script src="js/script.js" defer></script>
 <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
