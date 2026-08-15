@@ -267,7 +267,7 @@
         id: 'padres',
         slides: [
           { src: 'img-demo/demo_pantalla1_padres.png', caption: 'Resumen del hijo: ingreso al colegio, conducta y comunicados recientes.' },
-          { src: 'img-demo/demo_pantalla2_padres.png', caption: 'Historial de asistencia de sus hijos, exportable por periodo.' }
+          { src: 'img-demo/demo_pantalla2_padres.png', caption: 'Historial de asistencia de sus hijos, por periodo.' }
         ]
       },
       {
@@ -375,9 +375,9 @@
     const nextSlide = () => goToSlide(slideIndex + 1);
     const prevSlide = () => goToSlide(slideIndex - 1);
 
-    function switchRole(i) {
+    function switchRole(i, startSlide) {
       roleIndex = i;
-      slideIndex = 0;
+      slideIndex = startSlide || 0;
       demoTabs.forEach((t, idx) => {
         t.classList.toggle('is-active', idx === i);
         t.setAttribute('aria-selected', idx === i ? 'true' : 'false');
@@ -431,12 +431,13 @@
       }
     }
 
-    function openDemoModal() {
+    function openDemoModal(targetRoleId, targetSlide) {
       lastFocusedEl = document.activeElement;
       demoModal.classList.add('open');
       demoModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      switchRole(roleIndex);
+      const targetIndex = targetRoleId ? DEMO_ROLES.findIndex((r) => r.id === targetRoleId) : roleIndex;
+      switchRole(targetIndex >= 0 ? targetIndex : roleIndex, targetSlide);
       demoModalClose.focus();
       document.addEventListener('keydown', onModalKeydown);
     }
@@ -449,9 +450,23 @@
       document.removeEventListener('keydown', onModalKeydown);
       if (lastFocusedEl) lastFocusedEl.focus();
     }
-    demoOpenBtn.addEventListener('click', openDemoModal);
+    demoOpenBtn.addEventListener('click', () => openDemoModal());
     demoModalClose.addEventListener('click', closeDemoModal);
     demoModalBackdrop.addEventListener('click', closeDemoModal);
+
+    // ---- Pasos de "Cómo funciona": cada tarjeta abre la demo en la pantalla real que le corresponde ----
+    document.querySelectorAll('#fx-row .fx-card[data-role]').forEach((card) => {
+      const role = card.dataset.role;
+      const slide = parseInt(card.dataset.slide, 10) || 0;
+      const openFromCard = () => openDemoModal(role, slide);
+      card.addEventListener('click', openFromCard);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openFromCard();
+        }
+      });
+    });
 
     // ---- Lightbox: acercar la pantalla ----
     function resetZoom() {
