@@ -112,7 +112,8 @@
     animation:pulse 2.4s var(--ease) infinite;
   }
   .pulse-ring.delay{animation-delay:1.2s;}
-  .pulse-ring,.check{display:none;}
+  .pulse-ring{display:block;}
+  .check{display:none;}
   @keyframes pulse{
     0%{opacity:.55;transform:translate(-50%,-50%) scale(.82);}
     100%{opacity:0;transform:translate(-50%,-50%) scale(1.55);}
@@ -122,7 +123,7 @@
     background:#fff;border-radius:12px;padding:14px;
     box-shadow:0 20px 40px -14px rgba(11,37,69,.35);
     border:1px solid var(--linea);
-    animation:none;transform:rotate(-6deg);
+    animation:tap 3.8s var(--ease) infinite;
     transform-origin:70% 90%;
   }
   .id-card .strip{height:6px;border-radius:3px;background:var(--rojo);width:60%;margin-bottom:10px;}
