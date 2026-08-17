@@ -262,7 +262,7 @@
         id: 'direccion',
         slides: [
           { src: 'img-demo/demo_pantalla1.png', caption: 'Inicio de sesión con una cuenta demo distinta para cada rol.' },
-          { src: 'img-demo/demo_pantalla2.png', caption: 'Panel de dirección: asistencia del día, tardanzas y eventos del colegio.' },
+          { src: 'img-demo/demo_pantalla2.png', caption: 'Panel de dirección: asistencia del día, tardanzas y eventos de la institución educativa.' },
           { src: 'img-demo/demo_pantalla3.png', caption: 'Control en vivo: cada tap del carné se registra al instante en la puerta.' }
         ]
       },
@@ -276,7 +276,7 @@
       {
         id: 'padres',
         slides: [
-          { src: 'img-demo/demo_pantalla1_padres.png', caption: 'Resumen del hijo: ingreso al colegio, conducta y comunicados recientes.' },
+          { src: 'img-demo/demo_pantalla1_padres.png', caption: 'Resumen del hijo: ingreso a la institución educativa, conducta y comunicados recientes.' },
           { src: 'img-demo/demo_pantalla2_padres.png', caption: 'Historial de asistencia de sus hijos, por periodo.' }
         ]
       },
