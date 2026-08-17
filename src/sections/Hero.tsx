@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Container from '../components/Container'
 import Button from '../components/Button'
 import MockupFrame from '../components/MockupFrame'

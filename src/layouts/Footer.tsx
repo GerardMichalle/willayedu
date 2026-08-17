@@ -1,4 +1,4 @@
-import { Mail, MessageCircle } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import Logo from '../components/Logo'
 import Container from '../components/Container'
 import { EMAIL, EMAIL_URL, INSTAGRAM_URL, NAV_LINKS, TIKTOK_URL, WHATSAPP_URL } from '../lib/constants'
