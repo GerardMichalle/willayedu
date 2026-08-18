@@ -6,7 +6,7 @@ import ProblemSolution from './sections/ProblemSolution'
 import Features from './sections/Features'
 import InteractiveShowcase from './sections/InteractiveShowcase'
 import HowItWorks from './sections/HowItWorks'
-import Audience from './sections/Audience'
+import Courses from './sections/Courses'
 import Security from './sections/Security'
 import CTA from './sections/CTA'
 import FAQ from './sections/FAQ'
@@ -27,7 +27,7 @@ export default function App() {
         <Features />
         <InteractiveShowcase />
         <HowItWorks />
-        <Audience />
+        <Courses />
         <Security />
         <CTA />
         <FAQ />
