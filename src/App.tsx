@@ -6,15 +6,19 @@ import ProblemSolution from './sections/ProblemSolution'
 import Features from './sections/Features'
 import InteractiveShowcase from './sections/InteractiveShowcase'
 import HowItWorks from './sections/HowItWorks'
-import Benefits from './sections/Benefits'
 import Audience from './sections/Audience'
 import Security from './sections/Security'
 import CTA from './sections/CTA'
 import FAQ from './sections/FAQ'
+import Terms from './pages/Terms'
 
 export default function App() {
+  if (window.location.pathname === '/terminos-y-condiciones') {
+    return <Terms />
+  }
+
   return (
-    <div className="flex min-h-screen flex-col bg-warm">
+    <div className="flex min-h-screen flex-col select-none bg-warm">
       <Navbar />
       <main>
         <Hero />
@@ -23,7 +27,6 @@ export default function App() {
         <Features />
         <InteractiveShowcase />
         <HowItWorks />
-        <Benefits />
         <Audience />
         <Security />
         <CTA />

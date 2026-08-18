@@ -2,6 +2,7 @@ import { Bell, BookOpen, FileSpreadsheet, ScanLine } from 'lucide-react'
 import Container from '../components/Container'
 import MockupFrame from '../components/MockupFrame'
 import Reveal from '../components/Reveal'
+import panelPrincipalScreenshot from '../assets/screenshots/panelprincipal.png'
 
 const points = [
   { icon: ScanLine, text: 'Asistencia registrada en el momento en que el estudiante ingresa' },
@@ -45,9 +46,11 @@ export default function InteractiveShowcase() {
         <Reveal delay={120}>
           <div className="relative mx-auto max-w-md lg:max-w-none">
             <MockupFrame
+              src={panelPrincipalScreenshot}
               label="Vista de control en vivo"
               alt="Vista de control en vivo de Willay mostrando asistencia, comunicados y libretas del día"
-              dimensions="1400 × 1000 px"
+              aspect="aspect-[1901/904]"
+              zoomable
             />
 
             {floatingBadges.map((badge) => (

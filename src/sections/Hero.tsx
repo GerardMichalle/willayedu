@@ -1,10 +1,17 @@
+import { type MouseEvent } from 'react'
 import { ArrowRight } from 'lucide-react'
 import Container from '../components/Container'
 import Button from '../components/Button'
 import MockupFrame from '../components/MockupFrame'
 import Reveal from '../components/Reveal'
 import { WHATSAPP_URL } from '../lib/constants'
-import panelPrincipalScreenshot from '../assets/screenshots/panelprincipal.png'
+import loginScreenshot from '../assets/screenshots/login.png'
+
+const scrollToFeatures = (event: MouseEvent<HTMLAnchorElement>) => {
+  event.preventDefault()
+  document.querySelector('#caracteristicas')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  window.history.replaceState(null, '', window.location.pathname + window.location.search)
+}
 
 export default function Hero() {
   return (
@@ -37,7 +44,7 @@ export default function Hero() {
             >
               Solicitar demostración
             </Button>
-            <Button href="#caracteristicas" variant="secondary" className="px-7 py-3.5">
+            <Button href="#caracteristicas" onClick={scrollToFeatures} variant="secondary" className="px-7 py-3.5">
               Conocer el sistema
             </Button>
           </div>
@@ -49,16 +56,17 @@ export default function Hero() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="relative">
+          <div className="relative lg:origin-left lg:scale-[1.08]">
             <div
               aria-hidden="true"
               className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-brand-soft to-transparent"
             />
             <MockupFrame
-              src={panelPrincipalScreenshot}
-              label="Panel principal del sistema"
-              alt="Panel principal de Willay mostrando indicadores de asistencia y actividad del colegio"
-              aspect="aspect-[1901/904]"
+              src={loginScreenshot}
+              label="Inicio de sesión del sistema"
+              alt="Pantalla de inicio de sesión de Willay"
+              aspect="aspect-[3/2]"
+              showBrowserChrome={false}
             />
           </div>
         </Reveal>

@@ -1,9 +1,8 @@
 import { Laptop, Lock, MapPinned, Database } from 'lucide-react'
-import Container from '../components/Container'
 import Reveal from '../components/Reveal'
 
 const items = [
-  { icon: MapPinned, label: 'Pensado para colegios peruanos' },
+  { icon: MapPinned, label: 'Para instituciones públicas y privadas' },
   { icon: Database, label: 'Información centralizada' },
   { icon: Lock, label: 'Acceso seguro' },
   { icon: Laptop, label: 'Disponible desde cualquier dispositivo' },
@@ -11,19 +10,17 @@ const items = [
 
 export default function TrustBar() {
   return (
-    <section className="border-y border-line bg-white/60 py-8">
-      <Container>
-        <Reveal>
-          <ul className="grid grid-cols-2 gap-y-6 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-12">
-            {items.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-2.5 text-sm text-ink-soft">
-                <Icon className="h-4 w-4 shrink-0 text-brand" strokeWidth={1.8} aria-hidden="true" />
-                <span className="font-medium">{label}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      </Container>
+    <section className="overflow-hidden border-y border-line bg-white/60 py-8">
+      <Reveal>
+        <ul className="flex w-max gap-12 animate-trust-carousel hover:[animation-play-state:paused] motion-reduce:animate-none">
+          {items.map(({ icon: Icon, label }) => (
+            <li key={label} className="flex shrink-0 items-center gap-2.5 text-sm text-ink-soft">
+              <Icon className="h-4 w-4 shrink-0 text-brand" strokeWidth={1.8} aria-hidden="true" />
+              <span className="font-medium">{label}</span>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
     </section>
   )
 }

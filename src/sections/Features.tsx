@@ -1,4 +1,4 @@
-import { Bell, BookOpen, FileSpreadsheet, Megaphone, QrCode, ScanLine, ShieldCheck, Users } from 'lucide-react'
+import { Bell, BookOpen, FileSpreadsheet, Megaphone, ScanLine, ShieldCheck } from 'lucide-react'
 import Container from '../components/Container'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
@@ -27,18 +27,6 @@ const features = [
     title: 'Comunicados con seguimiento',
     description:
       'Envía comunicados institucionales o por aula, y verifica quién los ha leído y quién todavía no',
-  },
-  {
-    icon: Users,
-    title: 'Matrícula flexible',
-    description:
-      'Registra estudiantes uno por uno o importa el padrón completo desde Excel, con validación de errores antes de guardar',
-  },
-  {
-    icon: QrCode,
-    title: 'Credenciales con código QR',
-    description:
-      'Identificación digital que no expone datos personales del menor, pensada para el uso diario dentro del colegio',
   },
   {
     icon: FileSpreadsheet,

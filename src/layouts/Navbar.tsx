@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react'
+import { type MouseEvent, useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import Logo from '../components/Logo'
 import Button from '../components/Button'
 import Container from '../components/Container'
 import { LOGIN_URL, NAV_LINKS, WHATSAPP_URL } from '../lib/constants'
+
+const scrollToSection = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+  event.preventDefault()
+  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  window.history.replaceState(null, '', window.location.pathname + window.location.search)
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -32,7 +38,7 @@ export default function Navbar() {
       }`}
     >
       <Container className="flex h-18 items-center justify-between py-4">
-        <a href="#inicio" className="flex items-center" aria-label="Willay, ir al inicio">
+        <a href="#inicio" onClick={(event) => scrollToSection(event, '#inicio')} className="flex items-center" aria-label="Willay, ir al inicio">
           <Logo className="h-8 w-8" withWordmark />
         </a>
 
@@ -41,6 +47,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
+              onClick={(event) => scrollToSection(event, link.href)}
               className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
             >
               {link.label}
@@ -81,7 +88,10 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={(event) => {
+                  scrollToSection(event, link.href)
+                  setMenuOpen(false)
+                }}
                 className="rounded-lg px-3 py-3 text-sm font-medium text-ink-soft hover:bg-brand-soft/50 hover:text-ink"
               >
                 {link.label}
