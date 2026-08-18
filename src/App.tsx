@@ -11,8 +11,14 @@ import Security from './sections/Security'
 import CTA from './sections/CTA'
 import FAQ from './sections/FAQ'
 import Terms from './pages/Terms'
+import SurveyDashboard from './pages/SurveyDashboard'
+import ExperienceSurvey from './components/ExperienceSurvey'
 
 export default function App() {
+  if (window.location.pathname === '/admin/encuesta') {
+    return <SurveyDashboard />
+  }
+
   if (window.location.pathname === '/terminos-y-condiciones') {
     return <Terms />
   }
@@ -33,6 +39,7 @@ export default function App() {
         <FAQ />
       </main>
       <Footer />
+      <ExperienceSurvey />
     </div>
   )
 }
