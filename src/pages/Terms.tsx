@@ -90,7 +90,7 @@ export default function Terms() {
                 <FileText className="mt-0.5 h-5 w-5 shrink-0 text-brand" strokeWidth={1.8} aria-hidden="true" />
                 <div className="text-sm leading-relaxed text-ink-soft">
                   <p className="font-medium text-ink">Información del proveedor</p>
-                  <p className="mt-1">Willay es operada por un CEO, con atención a través de soportewillay@gmail.com.</p>
+                  <p className="mt-1">Willay es operada por un CEO, con atención a través de willaysoporte@gmail.com.</p>
                   <p className="mt-2 text-ink-faint">Última actualización: 17 de agosto de 2026.</p>
                 </div>
               </div>
@@ -108,8 +108,8 @@ export default function Terms() {
                 <h2 className="text-xl font-medium text-ink sm:text-2xl">12. Contacto</h2>
                 <p className="mt-3">
                   Para consultas sobre estos Términos, soporte o el tratamiento de información, escribe a{' '}
-                  <a href="mailto:soportewillay@gmail.com" className="font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand">
-                    soportewillay@gmail.com
+                  <a href="mailto:willaysoporte@gmail.com" className="font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand">
+                    willaysoporte@gmail.com
                   </a>.
                 </p>
               </section>
