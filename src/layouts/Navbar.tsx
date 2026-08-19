@@ -56,7 +56,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Button href={LOGIN_URL} variant="ghost" className="px-3">
+          <Button href={LOGIN_URL} target="_blank" rel="noopener noreferrer" variant="ghost" className="px-3">
             Iniciar sesión
           </Button>
           <Button href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" variant="primary">
@@ -98,7 +98,7 @@ export default function Navbar() {
               </a>
             ))}
             <div className="mt-2 flex flex-col gap-2 border-t border-line pt-4">
-              <Button href={LOGIN_URL} variant="secondary">
+              <Button href={LOGIN_URL} target="_blank" rel="noopener noreferrer" variant="secondary">
                 Iniciar sesión
               </Button>
               <Button href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" variant="primary">
