@@ -54,15 +54,15 @@ export default function Terms() {
   return (
     <div className="flex min-h-screen flex-col bg-warm">
       <header className="border-b border-line bg-white/90 backdrop-blur-md">
-        <Container className="flex h-18 items-center justify-between py-4">
+        <Container className="flex h-20 items-center justify-between py-4 lg:h-24">
           <a href="/" className="flex items-center" aria-label="Willay, volver al inicio">
-            <Logo className="h-8 w-8" withWordmark />
+            <Logo className="h-9 w-9 lg:h-10 lg:w-10" withWordmark />
           </a>
           <a
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+            className="inline-flex items-center gap-2 text-base font-medium text-ink-soft transition-colors hover:text-ink"
           >
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            <ArrowLeft className="h-5 w-5" aria-hidden="true" />
             Volver al inicio
           </a>
         </Container>

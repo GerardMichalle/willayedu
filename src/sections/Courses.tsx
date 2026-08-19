@@ -64,7 +64,7 @@ export default function Courses() {
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">{description}</p>
                   <span className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-brand-soft px-6 py-3 text-[15px] font-medium text-brand-dark">
                     <Clock className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
-                    Muy pronto
+                    Proximamente
                   </span>
                 </div>
               </article>

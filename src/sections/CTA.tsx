@@ -23,7 +23,7 @@ export default function CTA() {
               Empieza a transformar la gestión de tu institución
             </h2>
             <p className="relative mx-auto mt-4 max-w-lg text-balance text-white/70">
-              Agenda una demostración sin costo y descubre cómo Willay simplifica la asistencia
+              Agenda una demostración sin costo y descubre cómo Willay simplifica la asistencia,
               la comunicación y el seguimiento de tus estudiantes
             </p>
 

@@ -37,29 +37,29 @@ export default function Navbar() {
           : 'border-b border-transparent bg-transparent'
       }`}
     >
-      <Container className="flex h-18 items-center justify-between py-4">
+      <Container className="flex h-20 items-center justify-between py-4 lg:h-24">
         <a href="#inicio" onClick={(event) => scrollToSection(event, '#inicio')} className="flex items-center" aria-label="Willay, ir al inicio">
-          <Logo className="h-8 w-8" withWordmark />
+          <Logo className="h-9 w-9 lg:h-10 lg:w-10" withWordmark />
         </a>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegación principal">
+        <nav className="hidden items-center gap-10 lg:flex" aria-label="Navegación principal">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(event) => scrollToSection(event, link.href)}
-              className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+              className="text-base font-medium text-ink-soft transition-colors hover:text-ink"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <Button href={LOGIN_URL} target="_blank" rel="noopener noreferrer" variant="ghost" className="px-3">
+        <div className="hidden items-center gap-4 lg:flex">
+          <Button href={LOGIN_URL} target="_blank" rel="noopener noreferrer" variant="ghost" className="px-4 py-3.5 text-base">
             Iniciar sesión
           </Button>
-          <Button href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" variant="primary">
+          <Button href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" variant="primary" className="px-7 py-3.5 text-base">
             Solicitar demostración
           </Button>
         </div>
