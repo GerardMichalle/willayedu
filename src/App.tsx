@@ -13,6 +13,7 @@ import FAQ from './sections/FAQ'
 import Terms from './pages/Terms'
 import SurveyDashboard from './pages/SurveyDashboard'
 import ExperienceSurvey from './components/ExperienceSurvey'
+import ScrollToTop from './components/ScrollToTop'
 
 export default function App() {
   if (window.location.pathname === '/admin/encuesta') {
@@ -40,6 +41,7 @@ export default function App() {
       </main>
       <Footer />
       <ExperienceSurvey />
+      <ScrollToTop />
     </div>
   )
 }

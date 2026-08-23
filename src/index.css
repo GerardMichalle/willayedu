@@ -22,6 +22,18 @@
   --animate-float: float 6s ease-in-out infinite;
   --animate-feature-carousel: feature-carousel 18s ease-in-out infinite alternate;
   --animate-trust-carousel: trust-carousel 18s ease-in-out infinite alternate;
+  --animate-gallery-fade: gallery-fade 0.5s ease-out;
+
+  @keyframes gallery-fade {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   @keyframes trust-carousel {
     from {

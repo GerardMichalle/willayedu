@@ -1,8 +1,12 @@
-import { Bell, BookOpen, FileSpreadsheet, ScanLine } from 'lucide-react'
+import { Bell, BookOpen, ChevronLeft, ChevronRight, FileSpreadsheet, ScanLine } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import Container from '../components/Container'
 import MockupFrame from '../components/MockupFrame'
 import Reveal from '../components/Reveal'
 import panelPrincipalScreenshot from '../assets/screenshots/panelprincipal.png'
+import modoProfesorScreenshot from '../assets/screenshots/modo_profesor.png'
+import modoLibretasScreenshot from '../assets/screenshots/modo_profesor3.png'
+import modoEstudianteScreenshot from '../assets/screenshots/modoestudiante2.png'
 
 const points = [
   { icon: ScanLine, text: 'Asistencia registrada en el momento en que el estudiante ingresa' },
@@ -12,11 +16,122 @@ const points = [
 ]
 
 const floatingBadges = [
-  { text: 'Entrada registrada · 07:38', className: 'left-[-8%] top-10', delay: '0s' },
-  { text: 'Libreta publicada', className: 'right-[-6%] top-[38%]', delay: '1.2s' },
-  { text: 'Comunicado enviado', className: 'left-[-4%] bottom-24', delay: '2.4s' },
-  { text: '98% de asistencia hoy', className: 'right-[2%] bottom-[-4%]', delay: '0.6s' },
+  { text: 'Entrada registrada · 07:38', className: 'left-[-2%] top-[24%]', delay: '0s' },
+  { text: 'Libreta publicada', className: 'right-[-2%] top-[46%]', delay: '1.2s' },
+  { text: 'Comunicado enviado', className: 'left-[1%] bottom-[18%]', delay: '2.4s' },
+  { text: '98% de asistencia hoy', className: 'right-[3%] bottom-[9%]', delay: '0.6s' },
 ]
+
+const slides = [
+  {
+    src: panelPrincipalScreenshot,
+    label: 'Vista de control en vivo',
+    alt: 'Vista de control en vivo de Willay mostrando asistencia, comunicados y libretas del día',
+  },
+  {
+    src: modoProfesorScreenshot,
+    label: 'Vista del profesor',
+    alt: 'Panel del profesor en Willay con asistencia en vivo y acciones rápidas del aula',
+  },
+  {
+    src: modoLibretasScreenshot,
+    label: 'Libretas y notas',
+    alt: 'Carga de libretas digitales por el profesor en Willay',
+  },
+  {
+    src: modoEstudianteScreenshot,
+    label: 'Vista del estudiante',
+    alt: 'Perfil del estudiante en Willay con tarjeta digital, código QR y asistencia',
+  },
+]
+
+function ShowcaseCarousel() {
+  const [index, setIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  useEffect(() => {
+    if (isPaused) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const id = setInterval(() => {
+      setIndex((current) => (current + 1) % slides.length)
+    }, 4500)
+    return () => clearInterval(id)
+  }, [isPaused])
+
+  const goTo = (nextIndex: number) => {
+    setIndex((nextIndex + slides.length) % slides.length)
+  }
+
+  const slide = slides[index]
+
+  return (
+    <div
+      className="relative isolate"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
+    >
+      <div key={slide.label} className="animate-gallery-fade lg:pt-8">
+        <MockupFrame
+          src={slide.src}
+          label={slide.label}
+          alt={slide.alt}
+          aspect="aspect-[1901/904]"
+          zoomable
+        />
+      </div>
+
+      {index === 0 &&
+        floatingBadges.map((badge) => (
+          <div
+            key={badge.text}
+            aria-hidden="true"
+            className={`animate-float absolute z-40 hidden rounded-xl border border-line bg-white px-4 py-2.5 text-xs font-medium text-ink shadow-lg shadow-ink/5 lg:block ${badge.className}`}
+            style={{ animationDelay: badge.delay }}
+          >
+            {badge.text}
+          </div>
+        ))}
+
+      <div className="relative z-10 mt-5 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          onClick={() => goTo(index - 1)}
+          aria-label="Captura anterior"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-white text-ink shadow-sm transition-colors hover:bg-brand-soft"
+        >
+          <ChevronLeft className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
+        </button>
+
+        <div className="flex items-center gap-2">
+          {slides.map((s, i) => (
+            <button
+              key={s.label}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={`Ir a ${s.label}`}
+              aria-current={i === index}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === index ? 'w-6 bg-brand' : 'w-2 bg-ink-faint/40 hover:bg-ink-faint/70'
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => goTo(index + 1)}
+          aria-label="Siguiente captura"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-white text-ink shadow-sm transition-colors hover:bg-brand-soft"
+        >
+          <ChevronRight className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+  )
+}
 
 export default function InteractiveShowcase() {
   return (
@@ -44,25 +159,10 @@ export default function InteractiveShowcase() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="relative mx-auto max-w-md lg:max-w-none">
-            <MockupFrame
-              src={panelPrincipalScreenshot}
-              label="Vista de control en vivo"
-              alt="Vista de control en vivo de Willay mostrando asistencia, comunicados y libretas del día"
-              aspect="aspect-[1901/904]"
-              zoomable
-            />
-
-            {floatingBadges.map((badge) => (
-              <div
-                key={badge.text}
-                aria-hidden="true"
-                className={`animate-float absolute hidden rounded-xl border border-line bg-white px-4 py-2.5 text-xs font-medium text-ink shadow-lg shadow-ink/5 lg:block ${badge.className}`}
-                style={{ animationDelay: badge.delay }}
-              >
-                {badge.text}
-              </div>
-            ))}
+          <div className="mx-auto w-full max-w-md lg:max-w-[720px]">
+            <div className="lg:mx-auto lg:w-[80%]">
+              <ShowcaseCarousel />
+            </div>
           </div>
         </Reveal>
       </Container>
