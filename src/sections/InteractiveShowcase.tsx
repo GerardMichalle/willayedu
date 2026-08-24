@@ -1,5 +1,5 @@
 import { Bell, BookOpen, ChevronLeft, ChevronRight, FileSpreadsheet, ScanLine } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Container from '../components/Container'
 import MockupFrame from '../components/MockupFrame'
 import Reveal from '../components/Reveal'
@@ -16,10 +16,10 @@ const points = [
 ]
 
 const floatingBadges = [
-  { text: 'Entrada registrada · 07:38', className: 'left-[-2%] top-[24%]', delay: '0s' },
-  { text: 'Libreta publicada', className: 'right-[-2%] top-[46%]', delay: '1.2s' },
-  { text: 'Comunicado enviado', className: 'left-[1%] bottom-[18%]', delay: '2.4s' },
-  { text: '98% de asistencia hoy', className: 'right-[3%] bottom-[9%]', delay: '0.6s' },
+  { text: 'Entrada registrada · 07:38', className: 'left-2 top-3 lg:left-[-2%] lg:top-[24%]', delay: '0s' },
+  { text: 'Libreta publicada', className: 'right-2 top-3 lg:right-[-2%] lg:top-[46%]', delay: '1.2s' },
+  { text: 'Comunicado enviado', className: 'left-2 bottom-3 lg:left-[1%] lg:bottom-[18%]', delay: '2.4s' },
+  { text: '98% de asistencia hoy', className: 'right-2 bottom-16 lg:right-[3%] lg:bottom-[9%]', delay: '0.6s' },
 ]
 
 const slides = [
@@ -48,16 +48,30 @@ const slides = [
 function ShowcaseCarousel() {
   const [index, setIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [isInView, setIsInView] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (isPaused) return
+    const node = containerRef.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.4 },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (isPaused || !isInView) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const id = setInterval(() => {
       setIndex((current) => (current + 1) % slides.length)
     }, 4500)
     return () => clearInterval(id)
-  }, [isPaused])
+  }, [isPaused, isInView])
 
   const goTo = (nextIndex: number) => {
     setIndex((nextIndex + slides.length) % slides.length)
@@ -67,6 +81,7 @@ function ShowcaseCarousel() {
 
   return (
     <div
+      ref={containerRef}
       className="relative isolate"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -88,7 +103,7 @@ function ShowcaseCarousel() {
           <div
             key={badge.text}
             aria-hidden="true"
-            className={`animate-float absolute z-40 hidden rounded-xl border border-line bg-white px-4 py-2.5 text-xs font-medium text-ink shadow-lg shadow-ink/5 lg:block ${badge.className}`}
+            className={`animate-float absolute z-40 rounded-xl border border-line bg-white px-3 py-2 text-[11px] font-medium text-ink shadow-lg shadow-ink/5 lg:px-4 lg:py-2.5 lg:text-xs ${badge.className}`}
             style={{ animationDelay: badge.delay }}
           >
             {badge.text}
