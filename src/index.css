@@ -23,6 +23,16 @@
   --animate-feature-carousel: feature-carousel 18s ease-in-out infinite alternate;
   --animate-trust-carousel: trust-carousel 18s ease-in-out infinite alternate;
   --animate-gallery-fade: gallery-fade 0.5s ease-out;
+  --animate-tab-progress: tab-progress 6s linear forwards;
+
+  @keyframes tab-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
 
   @keyframes gallery-fade {
     from {

@@ -1,5 +1,5 @@
 import { Check, Minus } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Container from '../components/Container'
 import MockupFrame from '../components/MockupFrame'
 import Reveal from '../components/Reveal'
@@ -24,8 +24,35 @@ const withWillay = [
 
 type Tab = 'tradicional' | 'willay'
 
+const AUTO_ROTATE_MS = 6000
+
 export default function ProblemSolution() {
   const [tab, setTab] = useState<Tab>('tradicional')
+  const [isPaused, setIsPaused] = useState(false)
+  const [isInView, setIsInView] = useState(false)
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const node = cardRef.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.4 },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (isPaused || !isInView) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const id = setInterval(() => {
+      setTab((current) => (current === 'tradicional' ? 'willay' : 'tradicional'))
+    }, AUTO_ROTATE_MS)
+    return () => clearInterval(id)
+  }, [isPaused, isInView, tab])
 
   return (
     <section className="py-24">
@@ -56,6 +83,11 @@ export default function ProblemSolution() {
 
           <Reveal delay={100}>
             <div
+              ref={cardRef}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              onFocus={() => setIsPaused(true)}
+              onBlur={() => setIsPaused(false)}
               className={`flex h-full flex-col rounded-2xl border p-8 transition-colors duration-300 ${
                 tab === 'willay'
                   ? 'border-line-pink bg-brand-soft shadow-[0_20px_45px_-30px_rgba(224,45,45,0.35)]'
@@ -83,6 +115,16 @@ export default function ProblemSolution() {
                 >
                   Con Willay
                 </button>
+              </div>
+
+              <div className="mt-3 h-1 w-40 max-w-full overflow-hidden rounded-full bg-line" aria-hidden="true">
+                <div
+                  key={tab}
+                  className={`h-full origin-left rounded-full animate-tab-progress ${
+                    tab === 'willay' ? 'bg-brand' : 'bg-ink-faint'
+                  }`}
+                  style={{ animationPlayState: isPaused || !isInView ? 'paused' : 'running' }}
+                />
               </div>
 
               <div key={tab} className="animate-gallery-fade mt-6 flex flex-1 flex-col justify-center">
