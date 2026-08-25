@@ -5,6 +5,8 @@ import { Image as ImageIcon, Minus, Plus, X, ZoomIn } from 'lucide-react'
 interface MockupFrameProps {
   /** Import the screenshot from src/assets/screenshots and pass it here once available */
   src?: string
+  /** Import a video from src/assets/videos and pass it here to render it instead of the image */
+  videoSrc?: string
   alt: string
   label: string
   dimensions?: string
@@ -20,6 +22,7 @@ const ZOOM_STEP = 25
 
 export default function MockupFrame({
   src,
+  videoSrc,
   alt,
   label,
   dimensions = '1600 × 1000 px',
@@ -98,7 +101,17 @@ export default function MockupFrame({
         )}
 
         <div className={`relative ${aspect} w-full bg-brand-soft`}>
-          {src ? (
+          {videoSrc ? (
+            <video
+              src={videoSrc}
+              autoPlay
+              loop
+              muted
+              playsInline
+              aria-label={alt}
+              className="h-full w-full object-cover"
+            />
+          ) : src ? (
             <>
               <img
                 src={src}
