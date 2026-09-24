@@ -14,6 +14,7 @@ import Terms from './pages/Terms'
 import SurveyDashboard from './pages/SurveyDashboard'
 import ExperienceSurvey from './components/ExperienceSurvey'
 import ScrollToTop from './components/ScrollToTop'
+import WillayDog from './components/WillayDog'
 
 export default function App() {
   if (window.location.pathname === '/admin/encuesta') {
@@ -42,6 +43,9 @@ export default function App() {
       <Footer />
       <ExperienceSurvey />
       <ScrollToTop />
+      <div className="pointer-events-none fixed -bottom-3 left-2 z-30 origin-bottom-left scale-50 sm:-bottom-7 sm:left-5 sm:scale-100">
+        <WillayDog />
+      </div>
     </div>
   )
 }
