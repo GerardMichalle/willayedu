@@ -43,7 +43,7 @@ export default function App() {
       <Footer />
       <ExperienceSurvey />
       <ScrollToTop />
-      <div className="pointer-events-none fixed -bottom-3 left-2 z-30 origin-bottom-left scale-50 sm:-bottom-5 sm:left-4 sm:scale-75">
+      <div className="pointer-events-none fixed -bottom-3 left-2 z-30 origin-bottom-left scale-50 sm:-bottom-5 sm:left-4 sm:scale-[0.62]">
         <WillayDog />
       </div>
     </div>
