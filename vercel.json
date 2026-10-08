@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/terminos-y-condiciones", "destination": "/index.html" },
+    { "source": "/politica-de-privacidad", "destination": "/index.html" },
     { "source": "/admin/encuesta", "destination": "/index.html" }
   ]
 }
