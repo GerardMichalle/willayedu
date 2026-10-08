@@ -116,7 +116,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Willay. Todos los derechos reservados.
           </p>
           <div className="flex gap-6">
-            <span className="text-xs text-ink-faint">Política de privacidad</span>
+            <a href="/politica-de-privacidad" className="text-xs text-ink-faint transition-colors hover:text-ink-soft">Política de privacidad</a>
             <a href="/terminos-y-condiciones" className="text-xs text-ink-faint transition-colors hover:text-ink-soft">Términos y condiciones</a>
           </div>
         </div>

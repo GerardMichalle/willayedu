@@ -11,6 +11,7 @@ import Security from './sections/Security'
 import CTA from './sections/CTA'
 import FAQ from './sections/FAQ'
 import Terms from './pages/Terms'
+import Privacy from './pages/Privacy'
 import SurveyDashboard from './pages/SurveyDashboard'
 import ExperienceSurvey from './components/ExperienceSurvey'
 import ScrollToTop from './components/ScrollToTop'
@@ -22,6 +23,10 @@ export default function App() {
 
   if (window.location.pathname === '/terminos-y-condiciones') {
     return <Terms />
+  }
+
+  if (window.location.pathname === '/politica-de-privacidad') {
+    return <Privacy />
   }
 
   return (
