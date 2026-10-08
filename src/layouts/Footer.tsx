@@ -2,7 +2,7 @@ import { type MouseEvent } from 'react'
 import { Mail } from 'lucide-react'
 import Logo from '../components/Logo'
 import Container from '../components/Container'
-import { EMAIL, EMAIL_URL, INSTAGRAM_URL, NAV_LINKS, TIKTOK_URL, WHATSAPP_URL } from '../lib/constants'
+import { EMAIL, EMAIL_URL, INSTAGRAM_URL, NAV_LINKS, PLAY_STORE_URL, TIKTOK_URL, WHATSAPP_URL } from '../lib/constants'
 
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -94,15 +94,22 @@ export default function Footer() {
                 Muy pronto en estas plataformas
               </p>
               <div className="mt-3 flex flex-wrap items-center gap-3">
-                <img
-                  src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                  alt="Google Play — próximamente"
-                  draggable={false}
-                  className="h-10 w-auto"
-                />
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-md transition-opacity hover:opacity-80"
+                >
+                  <img
+                    src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                    alt="Descargar Willay en Google Play"
+                    draggable={false}
+                    className="h-10 w-auto"
+                  />
+                </a>
                 <img
                   src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                  alt="App Store — próximamente"
+                  alt="App Store, próximamente"
                   draggable={false}
                   className="h-10 w-auto"
                 />

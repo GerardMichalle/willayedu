@@ -9,6 +9,8 @@ export const EMAIL_URL = `mailto:${EMAIL}`
 export const INSTAGRAM_URL = 'https://instagram.com/willayedu'
 export const TIKTOK_URL = 'https://tiktok.com/@willayedu'
 
+export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.willay.app'
+
 export const NAV_LINKS = [
   { label: 'Inicio', href: '#inicio' },
   { label: 'Características', href: '#caracteristicas' },
