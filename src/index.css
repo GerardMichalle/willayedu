@@ -24,6 +24,17 @@
   --animate-trust-carousel: trust-carousel 18s ease-in-out infinite alternate;
   --animate-gallery-fade: gallery-fade 0.5s ease-out;
   --animate-tab-progress: tab-progress 6s linear forwards;
+  --animate-scan: scan 2.6s ease-in-out infinite;
+
+  @keyframes scan {
+    0%,
+    100% {
+      top: 10%;
+    }
+    50% {
+      top: 88%;
+    }
+  }
 
   @keyframes tab-progress {
     from {
@@ -125,15 +136,16 @@
 @layer components {
   .reveal {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(24px);
     transition:
-      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  /* `none` en vez de translateY(0): al terminar, el elemento deja de crear capa propia */
   .reveal.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -162,13 +162,13 @@ export default function InteractiveShowcase() {
           </p>
 
           <ul className="mt-8 flex flex-col gap-5">
-            {points.map(({ icon: Icon, text }) => (
-              <li key={text} className="flex items-start gap-3">
+            {points.map(({ icon: Icon, text }, index) => (
+              <Reveal as="li" key={text} delay={index * 90} className="flex items-start gap-3">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-brand shadow-sm">
                   <Icon className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" />
                 </span>
                 <span className="pt-1.5 text-ink-soft">{text}</span>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </Reveal>

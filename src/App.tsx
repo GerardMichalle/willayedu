@@ -8,7 +8,7 @@ import InteractiveShowcase from './sections/InteractiveShowcase'
 import HowItWorks from './sections/HowItWorks'
 import Courses from './sections/Courses'
 import Security from './sections/Security'
-import CTA from './sections/CTA'
+import MobileApp from './sections/MobileApp'
 import FAQ from './sections/FAQ'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
@@ -41,7 +41,7 @@ export default function App() {
         <HowItWorks />
         <Courses />
         <Security />
-        <CTA />
+        <MobileApp />
         <FAQ />
       </main>
       <Footer />

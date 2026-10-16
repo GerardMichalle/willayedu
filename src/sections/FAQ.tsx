@@ -7,17 +7,17 @@ const faqs = [
   {
     question: '¿Qué tipo de instituciones pueden usar el sistema?',
     answer:
-      'Willay está pensado para colegios peruanos de cualquier tamaño que quieran digitalizar el control de asistencia, la comunicación con las familias y la gestión académica básica.',
+      'Willay está pensado para instituciones educativas peruanas de cualquier tamaño que quieran digitalizar el control de asistencia, la comunicación con las familias y la gestión académica básica.',
   },
   {
     question: '¿Funciona desde celulares?',
     answer:
-      'Sí. Willay es una plataforma web a la que se accede desde el navegador de cualquier dispositivo: computadora, tablet o celular. No requiere instalar ninguna aplicación.',
+      'Sí. Puedes usar Willay desde el navegador de cualquier dispositivo (computadora, tablet o celular) sin instalar nada. Además, hay una app para Android disponible en Google Play; la versión para iPhone llegará próximamente.',
   },
   {
     question: '¿Cómo funciona el control de asistencia?',
     answer:
-      'Cada estudiante cuenta con una tarjeta RFID. Al ingresar al colegio, pasa la tarjeta por el lector y el sistema registra la hora automáticamente, clasificando la asistencia según el horario configurado por la institución.',
+      'Cada estudiante cuenta con una tarjeta RFID. Al ingresar, la pasa por el lector y el sistema registra la hora automáticamente, clasificando la asistencia según el horario configurado por la institución.',
   },
   {
     question: '¿Los apoderados reciben alertas?',
@@ -27,12 +27,12 @@ const faqs = [
   {
     question: '¿Cómo funcionan las libretas de notas?',
     answer:
-      'El tutor de cada aula sube la libreta oficial del colegio, escaneada o en PDF, cada bimestre. Las familias pueden consultarla y descargarla desde la plataforma en cualquier momento.',
+      'El tutor de cada aula sube la libreta oficial de la institución, escaneada o en PDF, cada bimestre. Las familias pueden consultarla y descargarla desde la plataforma en cualquier momento.',
   },
   {
     question: '¿La información está protegida?',
     answer:
-      'Sí. Toda la información viaja cifrada mediante HTTPS, las contraseñas están cifradas, los datos de cada colegio están completamente aislados de los demás y el sistema cumple con la Ley N.° 29733 de Protección de Datos Personales del Perú.',
+      'Sí. Toda la información viaja cifrada mediante HTTPS, las contraseñas están cifradas, los datos de cada institución están completamente aislados de los demás y el sistema cumple con la Ley N.° 29733 de Protección de Datos Personales del Perú.',
   },
   {
     question: '¿Se necesita comprar equipos especiales?',
@@ -42,7 +42,7 @@ const faqs = [
   {
     question: '¿Puedo solicitar una demostración?',
     answer:
-      'Claro. Escríbenos por WhatsApp o correo y coordinamos una demostración sin costo, adaptada a la realidad de tu colegio.',
+      'Claro. Escríbenos por WhatsApp o correo y coordinamos una demostración sin costo, adaptada a la realidad de tu institución.',
   },
 ]
 

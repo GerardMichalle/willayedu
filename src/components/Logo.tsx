@@ -17,7 +17,7 @@ export default function Logo({ className = 'h-8 w-8', withWordmark = false }: Lo
       </svg>
       {withWordmark && (
         <span className="font-display text-lg font-semibold tracking-tight text-ink">
-          Willay
+          Willay Edu
         </span>
       )}
     </span>

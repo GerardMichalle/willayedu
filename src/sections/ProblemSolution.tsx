@@ -6,7 +6,7 @@ import Reveal from '../components/Reveal'
 import comparisonVideo from '../assets/videos/dos.mp4'
 
 const traditional = [
-  'Registros fisicos de asistencia',
+  'Registros físicos de asistencia',
   'Información dispersa',
   'Seguimiento difícil',
   'Comunicación lenta con las familias',
@@ -59,7 +59,7 @@ export default function ProblemSolution() {
       <Container>
         <Reveal>
           <h2 className="mx-auto max-w-xl text-balance text-center text-3xl font-medium text-ink sm:text-4xl">
-            De los registros fisicos a la gestión digital en tiempo real
+            De los registros físicos a la gestión digital en tiempo real
           </h2>
         </Reveal>
 

@@ -2,7 +2,8 @@ import { type MouseEvent } from 'react'
 import { Mail } from 'lucide-react'
 import Logo from '../components/Logo'
 import Container from '../components/Container'
-import { EMAIL, EMAIL_URL, INSTAGRAM_URL, NAV_LINKS, PLAY_STORE_URL, TIKTOK_URL, WHATSAPP_URL } from '../lib/constants'
+import Reveal from '../components/Reveal'
+import { EMAIL, EMAIL_URL, INSTAGRAM_URL, NAV_LINKS, PLAY_STORE_URL, TIKTOK_URL } from '../lib/constants'
 
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -29,7 +30,7 @@ export default function Footer() {
     <footer className="border-t border-line bg-white">
       <Container className="py-14">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
-          <div className="flex flex-col gap-4">
+          <Reveal className="flex flex-col gap-4">
             <Logo className="h-8 w-8" withWordmark />
             <p className="max-w-xs text-sm leading-relaxed text-ink-soft">
               Gestión escolar con control de asistencia por RFID. Todo el control de tu
@@ -56,9 +57,9 @@ export default function Footer() {
               </a>
             </div>
 
-          </div>
+          </Reveal>
 
-          <div className="flex flex-col gap-3">
+          <Reveal delay={100} className="flex flex-col gap-3">
             <span className="text-sm font-semibold text-ink">Producto</span>
             {NAV_LINKS.map((link) => (
               <a
@@ -70,17 +71,10 @@ export default function Footer() {
                 {link.label}
               </a>
             ))}
-          </div>
+          </Reveal>
 
-          <div className="flex flex-col gap-3">
+          <Reveal delay={200} className="flex flex-col gap-3">
             <span className="text-sm font-semibold text-ink">Contacto</span>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex select-text items-center gap-2 text-sm text-ink-soft transition-colors hover:text-ink"
-            >
-            </a>
             <a
               href={EMAIL_URL}
               className="flex select-text items-center gap-2 text-sm text-ink-soft transition-colors hover:text-ink"
@@ -91,7 +85,7 @@ export default function Footer() {
 
             <div className="mt-2">
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-ink-faint">
-                Muy pronto en estas plataformas
+                Descarga la app
               </p>
               <div className="mt-3 flex flex-wrap items-center gap-3">
                 <a
@@ -107,18 +101,21 @@ export default function Footer() {
                     className="h-10 w-auto"
                   />
                 </a>
-                <img
-                  src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                  alt="App Store, próximamente"
-                  draggable={false}
-                  className="h-10 w-auto"
-                />
+                <span className="flex flex-col items-start gap-1">
+                  <img
+                    src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                    alt="App Store, próximamente"
+                    draggable={false}
+                    className="h-10 w-auto opacity-50"
+                  />
+                  <span className="text-xs text-ink-faint">Próximamente</span>
+                </span>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <Reveal delay={150} className="mt-12 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-ink-faint">
             © {new Date().getFullYear()} Willay. Todos los derechos reservados.
           </p>
@@ -126,7 +123,7 @@ export default function Footer() {
             <a href="/politica-de-privacidad" className="text-xs text-ink-faint transition-colors hover:text-ink-soft">Política de privacidad</a>
             <a href="/terminos-y-condiciones" className="text-xs text-ink-faint transition-colors hover:text-ink-soft">Términos y condiciones</a>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </footer>
   )

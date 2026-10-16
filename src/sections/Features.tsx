@@ -8,7 +8,7 @@ const features = [
     icon: ScanLine,
     title: 'Asistencia por RFID',
     description:
-      'Cada estudiante pasa su tarjeta al ingresar. El sistema registra la hora y clasifica automáticamente puntualidad y tardanza según el horario del colegio',
+      'Cada estudiante pasa su tarjeta al ingresar. El sistema registra la hora y clasifica automáticamente puntualidad y tardanza según el horario de la institución',
   },
   {
     icon: Bell,

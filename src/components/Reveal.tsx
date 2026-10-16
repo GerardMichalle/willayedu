@@ -7,6 +7,27 @@ interface RevealProps {
   delay?: number
 }
 
+// Un solo IntersectionObserver compartido por todos los Reveal de la página
+const revealCallbacks = new WeakMap<Element, () => void>()
+let sharedObserver: IntersectionObserver | null = null
+
+function getObserver() {
+  if (!sharedObserver) {
+    sharedObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          revealCallbacks.get(entry.target)?.()
+          revealCallbacks.delete(entry.target)
+          sharedObserver?.unobserve(entry.target)
+        }
+      },
+      { rootMargin: '0px 0px -48px 0px' },
+    )
+  }
+  return sharedObserver
+}
+
 export default function Reveal({ children, as: Tag = 'div', className = '', delay = 0 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null)
   const [visible, setVisible] = useState(false)
@@ -15,25 +36,19 @@ export default function Reveal({ children, as: Tag = 'div', className = '', dela
     const node = ref.current
     if (!node) return
 
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
-    if (prefersReducedMotion) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
       setVisible(true)
       return
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' },
-    )
+    const observer = getObserver()
+    revealCallbacks.set(node, () => setVisible(true))
     observer.observe(node)
-    return () => observer.disconnect()
+    return () => {
+      revealCallbacks.delete(node)
+      observer.unobserve(node)
+    }
   }, [])
 
   return (

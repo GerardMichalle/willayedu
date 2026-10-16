@@ -8,7 +8,7 @@ export default function Privacy() {
     <div className="flex min-h-screen flex-col bg-warm">
       <header className="border-b border-line bg-white/90 backdrop-blur-md">
         <Container className="flex h-20 items-center justify-between py-4 lg:h-24">
-          <a href="/" className="flex items-center" aria-label="Willay, volver al inicio">
+          <a href="/" className="flex items-center" aria-label="Willay Edu, volver al inicio">
             <Logo className="h-9 w-9 lg:h-10 lg:w-10" withWordmark />
           </a>
           <a
