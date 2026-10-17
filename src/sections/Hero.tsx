@@ -65,9 +65,10 @@ export default function Hero() {
 
         <Reveal delay={120}>
           <div className="relative lg:origin-left lg:scale-[1.08]">
+            {/* Sombra neutra y suave detrás de la imagen (antes era un marco rosa) */}
             <div
               aria-hidden="true"
-              className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-brand-soft to-transparent"
+              className="absolute inset-0 -z-10 rounded-2xl shadow-[0_45px_80px_-35px_rgba(31,27,24,0.40),0_20px_40px_-25px_rgba(31,27,24,0.20)]"
             />
             <MockupFrame
               src={loginScreenshot}
