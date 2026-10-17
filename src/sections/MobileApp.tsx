@@ -200,9 +200,10 @@ function PhoneCarousel({ index, setIndex }: { index: number; setIndex: (next: nu
       onBlur={() => setIsPaused(false)}
     >
       <div className="relative mx-auto w-full max-w-[19rem]">
+        {/* Sombra neutra y suave detrás del teléfono (antes era un marco rosa) */}
         <div
           aria-hidden="true"
-          className="absolute -inset-8 -z-10 rounded-[3rem] bg-gradient-to-br from-brand-soft-2 to-transparent"
+          className="absolute inset-0 -z-10 rounded-[2.5rem] shadow-[0_45px_80px_-35px_rgba(31,27,24,0.40),0_20px_40px_-25px_rgba(31,27,24,0.20)]"
         />
         <div
           role="img"
@@ -317,7 +318,16 @@ export default function MobileApp() {
                 className="h-14 w-auto"
               />
             </a>
-            <span className="text-sm text-ink-soft">App Store: próximamente</span>
+            <span className="relative">
+              <img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="App Store, próximamente"
+                draggable={false}
+                loading="lazy"
+                className="block h-10 w-auto opacity-50"
+              />
+              <span className="absolute left-0 top-full mt-1 whitespace-nowrap text-xs text-ink-faint">Próximamente</span>
+            </span>
           </div>
         </Reveal>
 
