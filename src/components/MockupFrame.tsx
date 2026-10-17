@@ -1,4 +1,4 @@
-import { type KeyboardEvent, useEffect, useRef, useState } from 'react'
+import { type KeyboardEvent, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Image as ImageIcon, Minus, Plus, X, ZoomIn } from 'lucide-react'
 
@@ -19,6 +19,8 @@ interface MockupFrameProps {
 const MIN_ZOOM = 100
 const MAX_ZOOM = 250
 const ZOOM_STEP = 25
+/** Duración de la animación de cierre (igual a --animate-zoom-pop-out en index.css) */
+const EXIT_MS = 220
 
 export default function MockupFrame({
   src,
@@ -32,14 +34,47 @@ export default function MockupFrame({
   zoomable = false,
 }: MockupFrameProps) {
   const [isZoomed, setIsZoomed] = useState(false)
+  const [isClosing, setIsClosing] = useState(false)
   const [zoomLevel, setZoomLevel] = useState(MIN_ZOOM)
   const zoomViewportRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeTimer = useRef<number | undefined>(undefined)
+
+  useEffect(() => () => window.clearTimeout(closeTimer.current), [])
+
+  // Cierra con una animación corta; con "reducir movimiento" cierra al instante
+  const closeZoom = () => {
+    if (closeTimer.current !== undefined) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsZoomed(false)
+      return
+    }
+    setIsClosing(true)
+    closeTimer.current = window.setTimeout(() => {
+      closeTimer.current = undefined
+      setIsZoomed(false)
+      setIsClosing(false)
+    }, EXIT_MS)
+  }
+
+  // Antes de pintar, la ventana crece (y al cerrar se encoge) desde donde estaba la miniatura
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current
+    const trigger = triggerRef.current
+    if (!isZoomed || !dialog || !trigger) return
+
+    const box = trigger.getBoundingClientRect()
+    const x = box.left + box.width / 2 - dialog.offsetLeft
+    const y = box.top + box.height / 2 - dialog.offsetTop
+    dialog.style.transformOrigin = `${x}px ${y}px`
+  }, [isZoomed])
 
   useEffect(() => {
     if (!isZoomed) return
 
     const onKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === 'Escape') setIsZoomed(false)
+      if (event.key === 'Escape') closeZoom()
     }
 
     document.addEventListener('keydown', onKeyDown)
@@ -61,11 +96,12 @@ export default function MockupFrame({
 
   const openZoom = () => {
     if (!zoomable || !src) return
+    window.clearTimeout(closeTimer.current)
+    closeTimer.current = undefined
+    setIsClosing(false)
     setZoomLevel(MIN_ZOOM)
     setIsZoomed(true)
   }
-
-  const closeZoom = () => setIsZoomed(false)
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (!zoomable || !src || (event.key !== 'Enter' && event.key !== ' ')) return
@@ -80,6 +116,7 @@ export default function MockupFrame({
   return (
     <>
       <div
+        ref={triggerRef}
         className={`group overflow-hidden rounded-2xl border border-line bg-white shadow-[0_30px_60px_-25px_rgba(31,27,24,0.25)] ${zoomable && src ? 'cursor-zoom-in' : ''} ${className}`}
         role={zoomable && src ? 'button' : undefined}
         tabIndex={zoomable && src ? 0 : undefined}
@@ -138,14 +175,15 @@ export default function MockupFrame({
 
       {zoomable && src && isZoomed && createPortal(
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/45 p-3 backdrop-blur-sm sm:p-8"
+          className={`fixed inset-0 z-[100] flex items-center justify-center bg-ink/45 p-3 backdrop-blur-sm sm:p-8 ${isClosing ? 'pointer-events-none animate-zoom-fade-out' : 'animate-zoom-fade-in'} motion-reduce:animate-none`}
           role="dialog"
           aria-modal="true"
           aria-label={`Vista ampliada: ${label}`}
           onClick={closeZoom}
         >
           <div
-            className="relative flex max-h-full w-[min(96vw,1500px)] flex-col rounded-2xl border border-white/50 bg-white p-2 shadow-2xl"
+            ref={dialogRef}
+            className={`relative flex max-h-full w-[min(96vw,1500px)] flex-col rounded-2xl border border-white/50 bg-white p-2 shadow-2xl ${isClosing ? 'animate-zoom-pop-out' : 'animate-zoom-pop-in'} motion-reduce:animate-none`}
             onClick={(event) => event.stopPropagation()}
           >
             <div className="absolute left-4 top-4 z-10 flex items-center rounded-full border border-line bg-white/95 p-1 shadow-md backdrop-blur-sm">
