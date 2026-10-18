@@ -49,6 +49,8 @@ function ShowcaseCarousel() {
   const [index, setIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isInView, setIsInView] = useState(false)
+  // Con la imagen ampliada abierta el carrusel se queda quieto, aunque el mouse o el foco ya no estén encima
+  const [isZoomOpen, setIsZoomOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -64,14 +66,14 @@ function ShowcaseCarousel() {
   }, [])
 
   useEffect(() => {
-    if (isPaused || !isInView) return
+    if (isPaused || isZoomOpen || !isInView) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const id = setInterval(() => {
       setIndex((current) => (current + 1) % slides.length)
     }, 4500)
     return () => clearInterval(id)
-  }, [isPaused, isInView])
+  }, [isPaused, isZoomOpen, isInView])
 
   const goTo = (nextIndex: number) => {
     setIndex((nextIndex + slides.length) % slides.length)
@@ -95,6 +97,7 @@ function ShowcaseCarousel() {
           alt={slide.alt}
           aspect="aspect-[1901/904]"
           zoomable
+          onZoomChange={setIsZoomOpen}
         />
       </div>
 

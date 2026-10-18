@@ -14,6 +14,8 @@ interface MockupFrameProps {
   className?: string
   showBrowserChrome?: boolean
   zoomable?: boolean
+  /** Avisa si la imagen ampliada está abierta (para pausar un carrusel que la rodee). Debe ser una función estable. */
+  onZoomChange?: (isOpen: boolean) => void
 }
 
 const MIN_ZOOM = 100
@@ -32,6 +34,7 @@ export default function MockupFrame({
   className = '',
   showBrowserChrome = true,
   zoomable = false,
+  onZoomChange,
 }: MockupFrameProps) {
   const [isZoomed, setIsZoomed] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
@@ -42,6 +45,12 @@ export default function MockupFrame({
   const closeTimer = useRef<number | undefined>(undefined)
 
   useEffect(() => () => window.clearTimeout(closeTimer.current), [])
+
+  // Mientras la imagen ampliada está abierta, el carrusel de atrás no debe cambiar de captura
+  useEffect(() => {
+    onZoomChange?.(isZoomed)
+    return () => onZoomChange?.(false)
+  }, [isZoomed, onZoomChange])
 
   // Cierra con una animación corta; con "reducir movimiento" cierra al instante
   const closeZoom = () => {
