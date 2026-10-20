@@ -74,7 +74,7 @@ export default function Hero() {
               src={loginScreenshot}
               label="Inicio de sesión del sistema"
               alt="Pantalla de inicio de sesión de Willay"
-              aspect="aspect-[3/2]"
+              aspect="aspect-[1672/941]"
               showBrowserChrome={false}
             />
           </div>
