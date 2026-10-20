@@ -7,21 +7,21 @@ import Reveal from '../components/Reveal'
 import { WHATSAPP_URL } from '../lib/constants'
 import loginScreenshot from '../assets/screenshots/login.png'
 
-const scrollToFeatures = (event: MouseEvent<HTMLAnchorElement>) => {
+const scrollToPlatform = (event: MouseEvent<HTMLAnchorElement>) => {
   event.preventDefault()
-  document.querySelector('#caracteristicas')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  document.querySelector('#plataforma')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   window.history.replaceState(null, '', window.location.pathname + window.location.search)
 }
 
 export default function Hero() {
   return (
-    <section id="inicio" className="relative overflow-hidden pt-16 pb-24 lg:pt-24 lg:pb-32">
+    <section id="inicio" className="relative overflow-hidden pt-16 pb-24 max-sm:pt-6 lg:pt-24 lg:pb-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-32 right-[-10%] h-[420px] w-[420px] rounded-full bg-brand-soft-2 blur-3xl"
       />
 
-      <Container className="relative grid items-center gap-16 lg:grid-cols-2 lg:gap-12">
+      <Container className="relative grid items-center gap-16 max-sm:gap-4 lg:grid-cols-2 lg:gap-12">
         <div>
           <Reveal>
             <h1 className="mt-6 text-4xl font-medium leading-[1.08] text-ink sm:text-5xl lg:text-[3.4rem]">
@@ -49,7 +49,7 @@ export default function Hero() {
               >
                 Solicitar demostración
               </Button>
-              <Button href="#caracteristicas" onClick={scrollToFeatures} variant="secondary" className="px-7 py-3.5">
+              <Button href="#plataforma" onClick={scrollToPlatform} variant="secondary" className="px-7 py-3.5">
                 Conocer el sistema
               </Button>
             </div>
@@ -63,7 +63,7 @@ export default function Hero() {
           </Reveal>
         </div>
 
-        <Reveal delay={120}>
+        <Reveal delay={120} className="max-sm:order-first">
           <div className="relative lg:origin-left lg:scale-[1.08]">
             {/* Sombra neutra y suave detrás de la imagen (antes era un marco rosa) */}
             <div

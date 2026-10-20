@@ -153,7 +153,7 @@ function ShowcaseCarousel() {
 
 export default function InteractiveShowcase() {
   return (
-    <section className="bg-brand-soft/40 py-24">
+    <section id="plataforma" className="scroll-mt-6 bg-brand-soft/40 py-24">
       <Container className="grid items-center gap-16 lg:grid-cols-2 lg:gap-12">
         <Reveal>
           <h2 className="text-3xl font-medium text-ink sm:text-4xl">
