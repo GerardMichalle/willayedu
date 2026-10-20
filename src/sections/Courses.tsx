@@ -8,21 +8,18 @@ import kidsImage from '../assets/screenshots/kids.jpg'
 
 const courses = [
   {
-    tag: 'Finanzas',
     title: 'Economía y Finanzas',
     description: 'Fundamentos económicos y gestión financiera para el desarrollo profesional y personal.',
     image: economyImage,
     objectPosition: 'center',
   },
   {
-    tag: 'Desarrollo Cognitivo',
     title: 'Matemáticas Divertidas',
     description: 'Aprende matemáticas a través de juegos y ejercicios prácticos para estimular el pensamiento lógico.',
     image: cognitiveImage,
-    objectPosition: 'center 85%',
+    objectPosition: 'center 35%',
   },
   {
-    tag: 'Lectura',
     title: 'Cuentos para Crecer',
     description: 'Colección de historias cautivadoras para fomentar la imaginación y el hábito de la lectura antes de dormir.',
     image: kidsImage,
@@ -43,7 +40,7 @@ export default function Courses() {
         </Reveal>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {courses.map(({ tag, title, description, image, objectPosition }, index) => (
+          {courses.map(({ title, description, image, objectPosition }, index) => (
             <Reveal key={title} delay={index * 100}>
               <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_18px_35px_-30px_rgba(31,27,24,0.35)] transition-transform duration-300 hover:-translate-y-1">
                 <div className="relative aspect-16/10 w-full overflow-hidden bg-brand-soft">
@@ -54,9 +51,6 @@ export default function Courses() {
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                   />
-                  <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-brand-dark shadow-sm backdrop-blur-sm">
-                    {tag}
-                  </span>
                 </div>
 
                 <div className="flex flex-1 flex-col p-6">
