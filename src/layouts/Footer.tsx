@@ -3,7 +3,8 @@ import { Mail } from 'lucide-react'
 import Logo from '../components/Logo'
 import Container from '../components/Container'
 import Reveal from '../components/Reveal'
-import { EMAIL, EMAIL_URL, INSTAGRAM_URL, NAV_LINKS, PLAY_STORE_URL, TIKTOK_URL } from '../lib/constants'
+import StoreBadges from '../components/StoreBadges'
+import { EMAIL, EMAIL_URL, INSTAGRAM_URL, NAV_LINKS, TIKTOK_URL } from '../lib/constants'
 
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -87,30 +88,7 @@ export default function Footer() {
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-ink-faint">
                 Descarga la app
               </p>
-              <div className="mt-3 flex flex-wrap items-center gap-3">
-                <a
-                  href={PLAY_STORE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-md transition-opacity hover:opacity-80"
-                >
-                  <img
-                    src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                    alt="Descargar Willay en Google Play"
-                    draggable={false}
-                    className="h-10 w-auto"
-                  />
-                </a>
-                <span className="flex flex-col items-start gap-1">
-                  <img
-                    src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                    alt="App Store, próximamente"
-                    draggable={false}
-                    className="h-10 w-auto opacity-50"
-                  />
-                  <span className="text-xs text-ink-faint">Próximamente</span>
-                </span>
-              </div>
+              <StoreBadges heightClass="h-[27px]" className="mt-3" />
             </div>
           </Reveal>
         </div>

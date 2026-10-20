@@ -15,7 +15,7 @@ import Container from '../components/Container'
 import Logo from '../components/Logo'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
-import { PLAY_STORE_URL } from '../lib/constants'
+import StoreBadges from '../components/StoreBadges'
 
 // `screen` enlaza cada punto con la pantalla del teléfono que lo ilustra
 const points: { icon: typeof Bell; text: string; screen?: number }[] = [
@@ -303,32 +303,7 @@ export default function MobileApp() {
             })}
           </ul>
 
-          <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3">
-            <a
-              href={PLAY_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-md transition-opacity hover:opacity-80"
-            >
-              <img
-                src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                alt="Descargar Willay en Google Play"
-                draggable={false}
-                loading="lazy"
-                className="h-14 w-auto"
-              />
-            </a>
-            <span className="relative">
-              <img
-                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                alt="App Store, próximamente"
-                draggable={false}
-                loading="lazy"
-                className="block h-10 w-auto opacity-50"
-              />
-              <span className="absolute left-0 top-full mt-1 whitespace-nowrap text-xs text-ink-faint">Próximamente</span>
-            </span>
-          </div>
+          <StoreBadges heightClass="h-[27px]" className="mt-9" />
         </Reveal>
 
         <Reveal delay={120} className="lg:order-first">
