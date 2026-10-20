@@ -21,7 +21,7 @@
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-feature-carousel: feature-carousel 18s ease-in-out infinite alternate;
-  --animate-trust-carousel: trust-carousel 18s ease-in-out infinite alternate;
+  --animate-trust-carousel: trust-carousel 12s ease-in-out infinite alternate;
   --animate-gallery-fade: gallery-fade 0.5s ease-out;
   --animate-tab-progress: tab-progress 6s linear forwards;
   --animate-scan: scan 2.6s ease-in-out infinite;
