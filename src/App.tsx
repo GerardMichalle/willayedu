@@ -15,6 +15,7 @@ import Privacy from './pages/Privacy'
 import SurveyDashboard from './pages/SurveyDashboard'
 import ExperienceSurvey from './components/ExperienceSurvey'
 import ScrollToTop from './components/ScrollToTop'
+import ChatWidget from './components/ChatWidget'
 
 export default function App() {
   if (window.location.pathname === '/admin/encuesta') {
@@ -47,6 +48,7 @@ export default function App() {
       <Footer />
       <ExperienceSurvey />
       <ScrollToTop />
+      <ChatWidget />
     </div>
   )
 }

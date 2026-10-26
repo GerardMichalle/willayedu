@@ -1,10 +1,15 @@
 export const LOGIN_URL = 'https://willay.app/login'
 
-export const WHATSAPP_URL =
-  'https://wa.me/51999999999?text=Hola,%20quiero%20solicitar%20una%20demostraci%C3%B3n%20de%20Willay'
+// Número provisional: cambiarlo aquí actualiza todos los botones de WhatsApp (y el chat)
+export const WHATSAPP_NUMBER = '51999999999'
+export const whatsappLink = (message: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+export const WHATSAPP_URL = whatsappLink('Hola, quiero solicitar una demostración de Willay')
 
 export const EMAIL = 'willaysoporte@gmail.com'
 export const EMAIL_URL = `mailto:${EMAIL}`
+export const emailLink = (subject: string, body: string) =>
+  `${EMAIL_URL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 
 export const INSTAGRAM_URL = 'https://instagram.com/willayedu'
 export const TIKTOK_URL = 'https://tiktok.com/@willayedu'
