@@ -23,6 +23,8 @@ const MAX_ZOOM = 250
 const ZOOM_STEP = 25
 /** Duración de la animación de cierre (igual a --animate-zoom-pop-out en index.css) */
 const EXIT_MS = 220
+/** Duración de la transición al acercar o alejar con + / − */
+const ZOOM_MS = 320
 
 export default function MockupFrame({
   src,
@@ -40,6 +42,8 @@ export default function MockupFrame({
   const [isClosing, setIsClosing] = useState(false)
   const [zoomLevel, setZoomLevel] = useState(MIN_ZOOM)
   const zoomViewportRef = useRef<HTMLDivElement>(null)
+  const zoomImageRef = useRef<HTMLImageElement>(null)
+  const prevZoom = useRef(MIN_ZOOM)
   const triggerRef = useRef<HTMLDivElement>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
   const closeTimer = useRef<number | undefined>(undefined)
@@ -95,18 +99,37 @@ export default function MockupFrame({
     }
   }, [isZoomed])
 
-  useEffect(() => {
-    if (zoomLevel === MIN_ZOOM || !zoomViewportRef.current) return
-
+  // El tamaño cambia al instante y la imagen "llega" animada con transform (sin recalcular el layout en cada cuadro)
+  useLayoutEffect(() => {
     const viewport = zoomViewportRef.current
-    viewport.scrollLeft = (viewport.scrollWidth - viewport.clientWidth) / 2
-    viewport.scrollTop = (viewport.scrollHeight - viewport.clientHeight) / 2
+    const image = zoomImageRef.current
+    const from = prevZoom.current
+    prevZoom.current = zoomLevel
+    if (!viewport || !image) return
+
+    if (zoomLevel !== MIN_ZOOM) {
+      viewport.scrollLeft = (viewport.scrollWidth - viewport.clientWidth) / 2
+      viewport.scrollTop = (viewport.scrollHeight - viewport.clientHeight) / 2
+    }
+    if (from === zoomLevel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const view = viewport.getBoundingClientRect()
+    const box = image.getBoundingClientRect()
+    const transformOrigin = `${view.left + view.width / 2 - box.left}px ${view.top + view.height / 2 - box.top}px`
+    image.animate(
+      [
+        { transform: `scale(${from / zoomLevel})`, transformOrigin },
+        { transform: 'scale(1)', transformOrigin },
+      ],
+      { duration: ZOOM_MS, easing: 'cubic-bezier(0.2, 0.9, 0.3, 1)' },
+    )
   }, [zoomLevel])
 
   const openZoom = () => {
     if (!zoomable || !src) return
     window.clearTimeout(closeTimer.current)
     closeTimer.current = undefined
+    prevZoom.current = MIN_ZOOM
     setIsClosing(false)
     setZoomLevel(MIN_ZOOM)
     setIsZoomed(true)
@@ -230,14 +253,19 @@ export default function MockupFrame({
               ref={zoomViewportRef}
               className="max-h-[82vh] overflow-auto rounded-xl bg-brand-soft/30 pt-12 [touch-action:pan-x_pan-y]"
             >
-              <img
-                src={src}
-                alt={alt}
-                draggable={false}
+              <div
                 style={{ maxWidth: 'none', minWidth: '100%', width: `${zoomLevel}%` }}
-                className="block h-auto"
-                onDoubleClick={() => setZoomLevel((currentZoom) => currentZoom === MIN_ZOOM ? 175 : MIN_ZOOM)}
-              />
+                className="overflow-hidden"
+              >
+                <img
+                  ref={zoomImageRef}
+                  src={src}
+                  alt={alt}
+                  draggable={false}
+                  className="block h-auto w-full"
+                  onDoubleClick={() => setZoomLevel((currentZoom) => currentZoom === MIN_ZOOM ? 175 : MIN_ZOOM)}
+                />
+              </div>
             </div>
             <p className="px-2 pt-2 text-center text-xs text-ink-faint">
               Usa + o − para acercar. En celular, desliza la imagen ampliada para recorrerla.
