@@ -154,7 +154,7 @@ function QuickReplies({ replies, onPick }: { replies: QuickReply[]; onPick: (rep
               key={reply.id}
               type="button"
               onClick={() => onPick(reply)}
-              className={`flex min-h-15 min-w-0 items-center gap-2 rounded-2xl border px-2.5 text-left text-[13px] font-medium leading-tight transition-colors sm:gap-2.5 sm:px-3 sm:text-sm ${
+              className={`flex min-h-15 min-w-0 items-center gap-2 rounded-2xl border px-2.5 text-left text-[13px] font-medium leading-tight transition-colors max-[340px]:gap-1.5 max-[340px]:px-2 max-[340px]:text-xs sm:gap-2.5 sm:px-3 sm:text-sm ${
                 primary
                   ? 'border-brand-accent bg-brand-soft-2 text-brand-dark'
                   : 'border-line bg-white text-ink hover:border-brand-accent hover:bg-brand-soft'
@@ -162,7 +162,7 @@ function QuickReplies({ replies, onPick }: { replies: QuickReply[]; onPick: (rep
             >
               <Icon className={`h-4 w-4 shrink-0 sm:h-5 sm:w-5 ${primary ? 'text-brand' : 'text-ink'}`} strokeWidth={1.7} aria-hidden="true" />
               <span className="min-w-0 flex-1 break-words">{reply.label}</span>
-              <ChevronRight className="hidden h-4 w-4 shrink-0 text-ink-soft min-[360px]:block" strokeWidth={2} aria-hidden="true" />
+              <ChevronRight className="hidden h-4 w-4 shrink-0 text-ink-soft min-[400px]:block" strokeWidth={2} aria-hidden="true" />
             </button>
           )
         })}
