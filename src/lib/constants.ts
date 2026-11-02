@@ -24,6 +24,6 @@ export const NAV_LINKS = [
   { label: 'Inicio', href: '#inicio' },
   { label: 'Características', href: '#caracteristicas' },
   { label: 'Cómo funciona', href: '#como-funciona' },
-  { label: 'Willay Academy', href: '#academy' },
+  { label: 'Academia', href: '#academy' },
   { label: 'Preguntas frecuentes', href: '#faq' },
 ] as const
