@@ -6,7 +6,7 @@ import ProblemSolution from './sections/ProblemSolution'
 import Features from './sections/Features'
 import InteractiveShowcase from './sections/InteractiveShowcase'
 import HowItWorks from './sections/HowItWorks'
-import Courses from './sections/Courses'
+import Academy from './sections/Academy'
 import Security from './sections/Security'
 import MobileApp from './sections/MobileApp'
 import FAQ from './sections/FAQ'
@@ -40,7 +40,7 @@ export default function App() {
         <Features />
         <InteractiveShowcase />
         <HowItWorks />
-        <Courses />
+        <Academy />
         <Security />
         <MobileApp />
         <FAQ />

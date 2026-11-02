@@ -16,10 +16,10 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [heroCtaPassed, setHeroCtaPassed] = useState(false)
 
-  // El CTA del navbar solo aparece cuando el botón del Hero ya salió de pantalla,
-  // para no mostrar dos "Solicitar demostración" a la vez.
+  // El CTA del navbar solo aparece cuando la portada (Hero) ya salió de pantalla: arriba de todo no se muestra ningún
+  // "Solicitar demostración" (el Hero ya no tiene el suyo) y al bajar queda siempre a mano en el menú.
   useEffect(() => {
-    const heroCta = document.querySelector('[data-hero-cta]')
+    const heroCta = document.querySelector('#inicio')
     if (!heroCta) {
       setHeroCtaPassed(true)
       return

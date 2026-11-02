@@ -1,10 +1,8 @@
 import { type MouseEvent } from 'react'
-import { ArrowRight } from 'lucide-react'
 import Container from '../components/Container'
 import Button from '../components/Button'
 import MockupFrame from '../components/MockupFrame'
 import Reveal from '../components/Reveal'
-import { WHATSAPP_URL } from '../lib/constants'
 import loginScreenshot from '../assets/screenshots/login.png'
 
 const scrollToPlatform = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -38,17 +36,6 @@ export default function Hero() {
 
           <Reveal delay={160}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="primary"
-                icon={ArrowRight}
-                className="px-7 py-3.5"
-                data-hero-cta
-              >
-                Solicitar demostración
-              </Button>
               <Button href="#plataforma" onClick={scrollToPlatform} variant="secondary" className="px-7 py-3.5">
                 Conocer el sistema
               </Button>

@@ -1,4 +1,6 @@
 import {
+  ACADEMY_COURSE_URL,
+  ACADEMY_REGISTER_URL,
   EMAIL,
   EMAIL_URL,
   INSTAGRAM_URL,
@@ -219,7 +221,7 @@ const INTENTS: { id: string; patterns: Pattern[] }[] = [
   {
     id: 'cursos',
     patterns: [
-      [/\b(curso|cursos|clases|capacitacion|aprender|cuentos|matematicas|economia|finanzas)\b/, 2],
+      [/\b(curso|cursos|clases|capacitacion|aprender|cuentos|matematicas|economia|finanzas|academy|academia|excel)\b/, 2],
       [/\b(gratis|gratuito|gratuitos)\b/, 1],
     ],
   },
@@ -285,7 +287,7 @@ const TOPICS: Record<string, () => BotStep[]> = {
         q('offline', '¿Y si se cae el internet?'),
         q('start', '¿Qué necesito para empezar?'),
         q('datos', '¿De quién son los datos?'),
-        q('cursos', 'Cursos gratuitos'),
+        q('cursos', 'Willay Academy y cursos'),
         q('soporte', 'Ya soy cliente y necesito ayuda'),
       ],
     },
@@ -439,10 +441,14 @@ const TOPICS: Record<string, () => BotStep[]> = {
 
   cursos: () => [
     {
-      text: 'Willay está preparando cursos gratuitos para sus usuarios: Economía y Finanzas y, para los más chicos, Matemáticas Divertidas y Cuentos para Crecer.',
+      text: 'Willay Academy ya tiene su primer curso: Ruta Excel Analista, con 12 bloques, 49 lecciones y 180 ejercicios. Tu guía es Max, que te explica Excel paso a paso, con dibujos y juegos, aunque nunca lo hayas usado.',
+      links: [
+        { label: 'Crear cuenta', href: ACADEMY_REGISTER_URL, external: true },
+        { label: 'Ya tengo cuenta', href: ACADEMY_COURSE_URL, external: true },
+      ],
     },
     {
-      text: 'Todavía están en camino. Para enterarte apenas salgan, síguenos en Instagram o TikTok 👇',
+      text: 'Para enterarte de las novedades de Willay Academy, síguenos en Instagram o TikTok 👇',
       links: [
         { label: 'Instagram', href: INSTAGRAM_URL, external: true },
         { label: 'TikTok', href: TIKTOK_URL, external: true },
