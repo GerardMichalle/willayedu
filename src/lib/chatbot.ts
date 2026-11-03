@@ -441,7 +441,7 @@ const TOPICS: Record<string, () => BotStep[]> = {
 
   cursos: () => [
     {
-      text: 'Willay Academy ya tiene su primer curso: Ruta Excel Analista, con 12 bloques, 49 lecciones y 180 ejercicios. Tu guía es Max, que te explica Excel paso a paso, con dibujos y juegos, aunque nunca lo hayas usado.',
+      text: 'Willay Academy es una academia con cursos para todas las edades, y se van sumando cursos nuevos. Ya tiene su primer curso: Ruta Excel Analista, con 12 bloques, 49 lecciones y 180 ejercicios. Tu guía es Max, que te explica Excel paso a paso, con dibujos y juegos, aunque nunca lo hayas usado.',
       links: [
         { label: 'Crear cuenta', href: ACADEMY_REGISTER_URL, external: true },
         { label: 'Ya tengo cuenta', href: ACADEMY_COURSE_URL, external: true },
