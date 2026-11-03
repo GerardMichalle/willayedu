@@ -14,22 +14,18 @@ const scrollToSection = (event: MouseEvent<HTMLAnchorElement>, href: string) => 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [heroCtaPassed, setHeroCtaPassed] = useState(false)
+  const [enPlataforma, setEnPlataforma] = useState(false)
 
-  // El CTA del navbar solo aparece cuando la portada (Hero) ya salió de pantalla: arriba de todo no se muestra ningún
-  // "Solicitar demostración" (el Hero ya no tiene el suyo) y al bajar queda siempre a mano en el menú.
+  // El "Solicitar demostración" del navbar solo se ve mientras la persona está en la sección de la plataforma (#plataforma, la
+  // que ocupa el centro de la pantalla) y se esconde antes y después: así la landing no se llena de botones, porque el chat
+  // también permite solicitar la demostración y en el celular sigue dentro del menú desplegable.
   useEffect(() => {
-    const heroCta = document.querySelector('#inicio')
-    if (!heroCta) {
-      setHeroCtaPassed(true)
-      return
-    }
-    const observer = new IntersectionObserver(
-      ([entry]) =>
-        setHeroCtaPassed(!entry.isIntersecting && entry.boundingClientRect.bottom <= (entry.rootBounds?.top ?? 0)),
-      { rootMargin: '-96px 0px 0px 0px' },
-    )
-    observer.observe(heroCta)
+    const seccion = document.querySelector('#plataforma')
+    if (!seccion) return
+    const observer = new IntersectionObserver(([entry]) => setEnPlataforma(entry.isIntersecting), {
+      rootMargin: '-45% 0px -45% 0px',
+    })
+    observer.observe(seccion)
     return () => observer.disconnect()
   }, [])
 
@@ -98,9 +94,9 @@ export default function Navbar() {
             Iniciar sesión
           </Button>
           <div
-            inert={!heroCtaPassed}
+            inert={!enPlataforma}
             className={`-my-1 grid transition-[grid-template-columns,opacity] duration-300 ease-out ${
-              heroCtaPassed ? 'grid-cols-[1fr] opacity-100' : 'grid-cols-[0fr] opacity-0'
+              enPlataforma ? 'grid-cols-[1fr] opacity-100' : 'grid-cols-[0fr] opacity-0'
             }`}
           >
             <div className="min-w-0 overflow-hidden py-1">
