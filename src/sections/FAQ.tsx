@@ -1,7 +1,34 @@
+import { useEffect, useRef } from 'react'
 import Container from '../components/Container'
 import SectionHeading from '../components/SectionHeading'
 import Accordion from '../components/Accordion'
 import Reveal from '../components/Reveal'
+import createAccountVideo from '../assets/videos/crear-cuenta-academy.mp4'
+import createAccountPoster from '../assets/videos/crear-cuenta-academy.jpg'
+
+// El video no se descarga hasta que la persona le da reproducir (preload="none" con portada) y se detiene al cerrar la pregunta
+function CreateAccountVideo({ isOpen }: { isOpen: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (!isOpen) videoRef.current?.pause()
+  }, [isOpen])
+
+  return (
+    <div inert={!isOpen} className="mt-4 max-w-xl overflow-hidden rounded-xl border border-line bg-ink shadow-sm">
+      <video
+        ref={videoRef}
+        src={createAccountVideo}
+        poster={createAccountPoster}
+        controls
+        playsInline
+        preload="none"
+        aria-label="Video: cómo crear tu cuenta en Willay Academy, paso a paso"
+        className="aspect-video w-full"
+      />
+    </div>
+  )
+}
 
 const faqs = [
   {
@@ -43,6 +70,16 @@ const faqs = [
     question: '¿Puedo solicitar una demostración?',
     answer:
       'Claro. Escríbenos por WhatsApp o correo y coordinamos una demostración sin costo, adaptada a la realidad de tu institución.',
+  },
+  {
+    question: '¿Cómo creo mi cuenta en Willay Academy?',
+    answer: (isOpen: boolean) => (
+      <>
+        Entra a la sección Academia de esta página, toca Crear cuenta, completa tus datos y escribe el código de
+        verificación que te llega a tu correo. Mira el paso a paso en este video de 44 segundos
+        <CreateAccountVideo isOpen={isOpen} />
+      </>
+    ),
   },
 ]
 

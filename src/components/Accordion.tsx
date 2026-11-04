@@ -3,7 +3,8 @@ import { Plus } from 'lucide-react'
 
 interface AccordionItemData {
   question: string
-  answer: ReactNode
+  // Si la respuesta lleva contenido que se debe detener al cerrarla (un video), puede ser una función que recibe si está abierta
+  answer: ReactNode | ((isOpen: boolean) => ReactNode)
 }
 
 export default function Accordion({ items }: { items: AccordionItemData[] }) {
@@ -45,7 +46,9 @@ export default function Accordion({ items }: { items: AccordionItemData[] }) {
               style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
             >
               <div className="overflow-hidden">
-                <p className="px-6 pb-5 leading-relaxed text-ink-soft">{item.answer}</p>
+                <div className="px-6 pb-5 leading-relaxed text-ink-soft">
+                  {typeof item.answer === 'function' ? item.answer(isOpen) : item.answer}
+                </div>
               </div>
             </div>
           </div>
