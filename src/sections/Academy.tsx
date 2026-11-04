@@ -14,7 +14,7 @@ const points = [
 ]
 
 // Datos reales del primer curso disponible (Ruta Excel Analista)
-const courseStats = '12 bloques · 49 lecciones · 180 ejercicios'
+const courseStats = '17 bloques · 70 lecciones · 310 ejercicios'
 
 export default function Academy() {
   return (
@@ -48,7 +48,7 @@ export default function Academy() {
               </span>
               <h3 className="mt-3 text-2xl font-medium text-ink">Ruta Excel Analista</h3>
               <p className="mt-2 text-pretty leading-relaxed text-ink-soft">
-                De las fórmulas básicas a Power Query y VBA, practicando con los datos de la bodega de Don Pepe
+                Desde cero hasta Power Query y VBA, practicando con los datos de la bodega de Don Pepe
               </p>
               <p className="mt-3 text-sm font-medium text-brand-dark">{courseStats}</p>
             </div>
